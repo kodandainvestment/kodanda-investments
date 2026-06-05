@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
-import Navbar from "../components/Navbar";
+import Navbar from "../CommonComp/Navbar";
 
 const contactInfo = [
   { icon: <Phone size={22} />, title: "Call Us", detail: "+91 98765 43210", sub: "Mon – Fri, 9am – 6pm" },

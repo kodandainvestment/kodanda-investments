@@ -1,16 +1,23 @@
-import Navbar from "../components/Navbar";
+import Hero from "./Hero";
+import CompanyOverview from "./CompanyOverview";
+import MissionVision from "./MissionVision";
+import FundManagement from "./FundManagement";
+import LeadershipTeam from "./LeadershipTeam";
+import CoreValues from "./CoreValues";
+import WhyIndore from "./WhyIndore";
 
 export const metadata = { title: "About – Kodanda Investments" };
 
 export default function AboutPage() {
   return (
-    <div>
-      <div className="bg-indigo-900">
-        <Navbar />
-      </div>
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <h1 className="text-4xl font-bold text-indigo-900">About Us</h1>
-      </div>
-    </div>
+    <>
+      <Hero />
+      <CompanyOverview />
+      <MissionVision />
+      <FundManagement />
+      <LeadershipTeam />
+      <CoreValues />
+      <WhyIndore />
+    </>
   );
 }

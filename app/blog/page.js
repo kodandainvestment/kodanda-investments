@@ -2,7 +2,7 @@
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Clock, User, Tag } from "lucide-react";
-import Navbar from "../components/Navbar";
+import Navbar from "../CommonComp/Navbar";
 
 const ITEM_WIDTH = 380;
 const GAP = 28;

@@ -1,5 +1,5 @@
 import "./globals.css";
-import Footer from "./components/Footer";
+import Footer from "./CommonComp/Footer";
 
 export const metadata = {
   title: "Kodanda Investments",

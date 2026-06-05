@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../CommonComp/Navbar";
 
 export const metadata = { title: "Portfolio Companies – Kodanda Investments" };
 
