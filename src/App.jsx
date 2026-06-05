@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 // import Navbar from "./Component/Navbar"
+import Footer from "./Component/Footer"
 import AboutHero from "./Pages/About/AboutHero"
 import Home from "./Pages/Home/HomeHero"
 import FundingHero from "./Pages/Funding/FundingHero"
@@ -11,21 +12,21 @@ import SuccessStoriesHero from "./Pages/SuccessStories/SuccessStoriesHero"
 import ContactHero from "./Pages/Contact/ContactHero"
 
 function App() {
-
   return (
     <>
-    {/* <Navbar /> */}
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<AboutHero />} />
-      <Route path="/startup-funding" element={<FundingHero />} />
-      <Route path="/portfolio-companies" element={<PortfolioHero />} />
-      <Route path="/investments-criteria" element={<InvestmentsHero />} />
-      <Route path="/newsletter" element={<NewsletterHero />} />
-      <Route path="/blog" element={<BlogHero />} />
-      <Route path="/success-stories" element={<SuccessStoriesHero />} />
-      <Route path="/contact" element={<ContactHero />} />
-    </Routes>
+      {/* <Navbar /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutHero />} />
+        <Route path="/startup-funding" element={<FundingHero />} />
+        <Route path="/portfolio-companies" element={<PortfolioHero />} />
+        <Route path="/investments-criteria" element={<InvestmentsHero />} />
+        <Route path="/newsletter" element={<NewsletterHero />} />
+        <Route path="/blog" element={<BlogHero />} />
+        <Route path="/success-stories" element={<SuccessStoriesHero />} />
+        <Route path="/contact" element={<ContactHero />} />
+      </Routes>
+      <Footer />
     </>
   )
 }

@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import Navbar from "../../Component/Navbar";
+import Key from "./Key";
+import Company from "./Company";
+import Funding from "./Funding";
+import Featured from "./Featured";
+import Call from "./Call";
 
 export default function HomeHero() {
   const [phase, setPhase] = useState("video"); // "video" | "fade" | "image" | "text"
@@ -20,6 +25,7 @@ export default function HomeHero() {
   }, []);
 
   return (
+    <>
     <div className="relative w-full h-screen overflow-hidden bg-black">
        <Navbar />
       {/* Video */}
@@ -58,13 +64,27 @@ export default function HomeHero() {
             : "opacity-0 translate-y-8"
         }`}
       >
-        <h1 className="text-4xl md:text-6xl font-bold tracking-wide drop-shadow-lg">
-          Kodanda Investments
+        <h1 className="text-4xl md:text-6xl font-bold tracking-wide drop-shadow-lg max-w-[900px]">
+          Investing in India's <br/>Next Leader's.
         </h1>
-        <p className="mt-3 text-lg md:text-xl text-white/80 tracking-widest uppercase">
-          Pvt. Ltd.
+        <p className="mt-3 text-lg md:text-md text-white/80 tracking-widest uppercase max-w-[900px]">
+          Managing ₹20+ crores in corporate funds to accelerate visionary startups accross india's growing industrial corridors.
         </p>
+        <div className="mt-6">
+          <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-colors duration-300">
+            Get Funded
+          </button>
+          <button className="ml-4 px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full text-lg font-semibold hover:from-gray-800 hover:to-gray-900 transition-colors duration-300">
+            Invest with Us
+          </button>
+        </div>
       </div>
     </div>
+    <Key />
+    <Company />
+    <Funding />
+    <Featured />
+    <Call />
+    </>
   );
 }

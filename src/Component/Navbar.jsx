@@ -5,26 +5,30 @@ import { Search, ChevronDown, Menu, X } from "lucide-react";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  {
-    label: "Services",
-    mega: true,
-    dropdown: {
-      main: [
-        { label: "Startup Funding", href: "/startup-funding" },
-        { label: "Investments Criteria", href: "/investments-criteria" },
-        { label: "Portfolio Companies", href: "/portfolio-companies" },
-      ],
-      secondary: [
-        { label: "Success Stories", href: "/success-stories" },
-        { label: "Blog", href: "/blog" },
-        { label: "Newsletter", href: "/newsletter" },
-      ],
-      legal: [
-        { label: "Privacy Notice", href: "#" },
-        { label: "Security", href: "#" },
-      ],
-    },
-  },
+  { label: "Portfolio", href: "/portfolio-companies" },
+  // {
+  //   label: "Services",
+  //   mega: true,
+  //   dropdown: {
+  //     main: [
+  //       { label: "Startup Funding", href: "/startup-funding" },
+  //       { label: "Investments Criteria", href: "/investments-criteria" },
+  //       { label: "Portfolio Companies", href: "/portfolio-companies" },
+  //     ],
+  //     secondary: [
+  //       { label: "Success Stories", href: "/success-stories" },
+  //       { label: "Blog", href: "/blog" },
+  //       { label: "Newsletter", href: "/newsletter" },
+  //     ],
+  //     legal: [
+  //       { label: "Privacy Notice", href: "#" },
+  //       { label: "Security", href: "#" },
+  //     ],
+  //   },
+  // },
+  { label: "Funding", href: "/startup-funding" },
+  { label: "Newsletter", href: "/newsletter" },
+  { label: "Investments", href: "/investments-criteria" },
   { label: "Blog", href: "/blog" },
   { label: "Success Stories", href: "/success-stories" },
   { label: "Contact", href: "/contact" },
@@ -38,7 +42,7 @@ export default function Navbar() {
     setOpenMenu((prev) => (prev === label ? null : label));
 
   return (
-    <nav className="mt-8 rounded-full max-w-[90%] mx-auto relative z-50 bg-white shadow-md">
+    <nav className="mt-8 rounded-full max-w-[95%] mx-auto relative z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-bold text-xl text-indigo-900">
@@ -52,18 +56,16 @@ export default function Navbar() {
               <div key={link.label} className="relative">
                 <button
                   onClick={() => toggle(link.label)}
-                  className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded hover:text-indigo-700 transition-colors ${
-                    openMenu === link.label
+                  className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded hover:text-indigo-700 transition-colors ${openMenu === link.label
                       ? "text-indigo-700 underline underline-offset-4"
                       : "text-gray-700"
-                  }`}
+                    }`}
                 >
                   {link.label}
                   <ChevronDown
                     size={14}
-                    className={`transition-transform ${
-                      openMenu === link.label ? "rotate-180" : ""
-                    }`}
+                    className={`transition-transform ${openMenu === link.label ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
@@ -158,8 +160,7 @@ export default function Navbar() {
                 key={link.label}
                 to={link.href}
                 className={({ isActive }) =>
-                  `px-3 py-2 text-sm font-medium transition-colors ${
-                    isActive ? "text-indigo-700 underline underline-offset-4" : "text-gray-700 hover:text-indigo-700"
+                  `px-3 py-2 text-sm font-medium transition-colors ${isActive ? "text-indigo-700 underline underline-offset-4" : "text-gray-700 hover:text-indigo-700"
                   }`
                 }
               >
@@ -202,9 +203,9 @@ export default function Navbar() {
                     <div className="mt-1 pl-3 flex flex-col gap-1">
                       {(link.mega
                         ? [
-                            ...link.dropdown.main,
-                            ...link.dropdown.secondary,
-                          ]
+                          ...link.dropdown.main,
+                          ...link.dropdown.secondary,
+                        ]
                         : link.dropdown
                       ).map((item) => (
                         <Link
@@ -224,8 +225,7 @@ export default function Navbar() {
                   to={link.href}
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
-                    `text-sm font-medium ${
-                      isActive ? "text-indigo-700" : "text-gray-700"
+                    `text-sm font-medium ${isActive ? "text-indigo-700" : "text-gray-700"
                     }`
                   }
                 >
