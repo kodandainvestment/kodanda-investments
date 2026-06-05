@@ -1,21 +1,19 @@
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 
 const slides = [
   {
     id: 1,
     tag: "Our Portfolio",
     title: "Featured Portfolio",
-    bg: "#0a1628",
+    bg: "#0041a1",
     content: (
       <div style={{ display: "flex", gap: 24, maxWidth: 700, flexWrap: "wrap" }}>
         {[
           ["Company A", "Leading AI-powered solutions provider", "#1e3a8a"],
           ["Company B", "Revolutionary manufacturing tech", "#1e1b4b"],
           ["Company C", "Healthcare innovation platform", "#14213d"],
-        ].map(([name, desc, bg]) => (
-          <div key={name} style={{ flex: "1 1 180px", background: bg, borderRadius: 16, padding: "24px 20px", minWidth: 160 }}>
+        ].map(([name, desc, color]) => (
+          <div key={name} style={{ flex: "1 1 180px", background: color, borderRadius: 16, padding: "24px 20px", minWidth: 160 }}>
             <div style={{ width: "100%", height: 80, background: "rgba(255,255,255,0.06)", borderRadius: 10, marginBottom: 16 }} />
             <p style={{ color: "#fff", fontWeight: 700, fontSize: 16, margin: 0 }}>{name}</p>
             <p style={{ color: "#94a3b8", fontSize: 13, margin: "6px 0 0" }}>{desc}</p>
@@ -84,7 +82,6 @@ const slides = [
               fontSize: 15,
               border: "none",
               cursor: "pointer",
-              flexShrink: 0,
             }}
           >
             Subscribe
@@ -96,47 +93,29 @@ const slides = [
 ];
 
 export default function Featured() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [`-${(slides.length - 1) * 100}vw`, "0vw"]
-  );
-
   return (
-    <div ref={containerRef} style={{ height: `${slides.length * 100}vh` }}>
-      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
-        <motion.div style={{ x, display: "flex", width: `${slides.length * 100}vw`, height: "100%" }}>
-          {slides.map((slide) => (
-            <div
-              key={slide.id}
-              style={{
-                width: "100vw",
-                height: "100vh",
-                flexShrink: 0,
-                background: slide.bg,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: "0 10vw",
-              }}
-            >
-              <span style={{ fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: 16 }}>
-                0{slide.id} — {slide.tag}
-              </span>
-              <h2 style={{ color: "#fff", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 800, margin: "0 0 32px", lineHeight: 1.1 }}>
-                {slide.title}
-              </h2>
-              {slide.content}
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </div>
+    <>
+      {slides.map((slide) => (
+        <section
+          key={slide.id}
+          style={{
+            background: slide.bg,
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "80px 10vw",
+          }}
+        >
+          <span style={{ fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: 16 }}>
+            0{slide.id} — {slide.tag}
+          </span>
+          <h2 style={{ color: "#fff", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 800, margin: "0 0 32px", lineHeight: 1.1 }}>
+            {slide.title}
+          </h2>
+          {slide.content}
+        </section>
+      ))}
+    </>
   );
 }
