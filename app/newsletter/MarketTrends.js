@@ -14,23 +14,26 @@ const sentimentStyle = {
 
 export default function MarketTrends() {
   return (
-    <section className="bg-indigo-950 py-20 px-6">
+    <section className="py-20 px-6" style={{ background: "#fff" }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <span className="text-indigo-400 text-sm font-semibold tracking-widest uppercase">Macro View</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white">Market Trends</h2>
-          <p className="mt-4 text-white/50 text-sm max-w-md mx-auto">
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>Macro View</span>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Market Trends</h2>
+          <p className="mt-4 text-sm max-w-md mx-auto text-gray-500">
             Sector signals we're tracking — straight from our quarterly research notes.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {trends.map(({ sector, trend, detail, sentiment }) => (
-            <div key={sector} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+            <div key={sector} className="rounded-2xl p-6 transition-colors" style={{ background: "#f8f8ff", border: "1px solid rgba(46,44,119,0.12)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(50,225,252,0.07)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#f8f8ff")}
+            >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-bold text-white text-base">{sector}</h3>
+                <h3 className="font-bold text-base" style={{ color: "#2D2754" }}>{sector}</h3>
                 <span className={`text-xs font-bold px-3 py-1 rounded-full ${sentimentStyle[sentiment]}`}>{trend}</span>
               </div>
-              <p className="text-white/50 text-sm leading-relaxed">{detail}</p>
+              <p className="text-sm leading-relaxed text-gray-500">{detail}</p>
             </div>
           ))}
         </div>

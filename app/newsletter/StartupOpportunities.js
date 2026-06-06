@@ -6,27 +6,25 @@ const opportunities = [
 ];
 
 const typeStyle = {
-  "Co-invest": "bg-blue-100 text-blue-700",
-  Hiring: "bg-purple-100 text-purple-700",
-  Partnership: "bg-teal-100 text-teal-700",
+  "Co-invest": { background: "rgba(50,225,252,0.12)", color: "#2E2C77" },
+  Hiring: { background: "rgba(46,44,119,0.12)", color: "#2E2C77" },
+  Partnership: { background: "rgba(50,225,252,0.18)", color: "#2D2754" },
 };
 
 export default function StartupOpportunities() {
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">
       <div className="text-center mb-12">
-        <span className="text-indigo-600 text-sm font-semibold tracking-widest uppercase">Network Deals</span>
-        <h2 className="mt-3 text-3xl md:text-4xl font-bold text-indigo-950">Startup Opportunities</h2>
-        <p className="mt-4 text-gray-500 text-sm max-w-md mx-auto">
-          Exclusive opportunities shared only with our newsletter subscribers.
-        </p>
+        <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>Network Deals</span>
+        <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Startup Opportunities</h2>
+        <p className="mt-4 text-gray-500 text-sm max-w-md mx-auto">Exclusive opportunities shared only with our newsletter subscribers.</p>
       </div>
       <div className="flex flex-col gap-5">
         {opportunities.map(({ type, company, detail, deadline }) => (
-          <div key={company + type} className="flex flex-col sm:flex-row sm:items-center gap-4 p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-            <span className={`text-xs font-bold px-3 py-1.5 rounded-full self-start sm:self-auto flex-shrink-0 ${typeStyle[type]}`}>{type}</span>
+          <div key={company + type} className="flex flex-col sm:flex-row sm:items-center gap-4 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow" style={{ border: "1px solid rgba(46,44,119,0.1)" }}>
+            <span className="text-xs font-bold px-3 py-1.5 rounded-full self-start sm:self-auto flex-shrink-0" style={typeStyle[type]}>{type}</span>
             <div className="flex-1">
-              <span className="font-bold text-indigo-950">{company}</span>
+              <span className="font-bold" style={{ color: "#2D2754" }}>{company}</span>
               <span className="mx-2 text-gray-300">·</span>
               <span className="text-gray-500 text-sm">{detail}</span>
             </div>
@@ -34,9 +32,7 @@ export default function StartupOpportunities() {
           </div>
         ))}
       </div>
-      <p className="mt-8 text-center text-sm text-gray-400">
-        Subscribe below to get live opportunities directly in your inbox.
-      </p>
+      <p className="mt-8 text-center text-sm text-gray-400">Subscribe below to get live opportunities directly in your inbox.</p>
     </section>
   );
 }

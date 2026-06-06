@@ -13,8 +13,8 @@ export default function WhatWeAvoid() {
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">
       <div className="text-center mb-14">
-        <span className="text-indigo-600 text-sm font-semibold tracking-widest uppercase">Not a Fit</span>
-        <h2 className="mt-3 text-3xl md:text-4xl font-bold text-indigo-950">What We Avoid</h2>
+        <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>Not a Fit</span>
+        <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>What We Avoid</h2>
         <p className="mt-4 text-gray-500 max-w-lg mx-auto text-sm">
           Knowing what we don't do is just as important — it saves everyone's time.
         </p>

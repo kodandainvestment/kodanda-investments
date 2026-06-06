@@ -29,11 +29,11 @@ export default function ReadinessChecklist() {
     : { label: "Keep building — come back when you're ready.", color: "text-red-700", bg: "bg-red-50 border-red-200" };
 
   return (
-    <section className="bg-gray-50 py-20 px-6">
+    <section className="py-20 px-6" style={{ background: "#f8f8ff" }}>
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <span className="text-indigo-600 text-sm font-semibold tracking-widest uppercase">Self-Assessment</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-indigo-950">Startup Readiness Checklist</h2>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>Self-Assessment</span>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Startup Readiness Checklist</h2>
           <p className="mt-4 text-gray-500 text-sm max-w-md mx-auto">
             Tick every item that applies to your startup right now. Be honest — this is for your benefit.
           </p>
@@ -43,12 +43,16 @@ export default function ReadinessChecklist() {
           {checklist.map(({ id, item }) => {
             const done = checked.includes(id);
             return (
-              <label key={id} className="flex items-center gap-4 px-6 py-4 cursor-pointer hover:bg-indigo-50 transition-colors">
+              <label key={id} className="flex items-center gap-4 px-6 py-4 cursor-pointer transition-colors" style={{}}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(50,225,252,0.05)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+              >
                 <input
                   type="checkbox"
                   checked={done}
                   onChange={() => toggle(id)}
-                  className="w-5 h-5 accent-indigo-600 flex-shrink-0"
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ accentColor: "#2E2C77" }}
                 />
                 <span className={`text-sm ${done ? "line-through text-gray-400" : "text-gray-700"}`}>{item}</span>
               </label>
@@ -56,16 +60,15 @@ export default function ReadinessChecklist() {
           })}
         </div>
 
-        {/* Score bar */}
         <div className={`mt-8 border rounded-2xl p-6 ${bg}`}>
           <div className="flex justify-between items-center mb-3">
             <span className="text-sm font-semibold text-gray-600">Your Score</span>
-            <span className="text-sm font-bold text-indigo-700">{score} / {checklist.length}</span>
+            <span className="text-sm font-bold" style={{ color: "#2E2C77" }}>{score} / {checklist.length}</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
-              className="h-2.5 rounded-full bg-indigo-600 transition-all duration-500"
-              style={{ width: `${pct}%` }}
+              className="h-2.5 rounded-full transition-all duration-500"
+              style={{ width: `${pct}%`, background: "#2E2C77" }}
             />
           </div>
           <p className={`mt-4 text-sm font-semibold ${color}`}>{label}</p>
@@ -74,7 +77,10 @@ export default function ReadinessChecklist() {
         <div className="mt-6 text-center">
           <a
             href="/startup-funding"
-            className="inline-block px-8 py-3 bg-indigo-700 text-white rounded-full text-sm font-semibold hover:bg-indigo-800 transition-colors"
+            className="inline-block px-8 py-3 text-white rounded-full text-sm font-semibold transition-colors"
+            style={{ background: "#2E2C77" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#2D2754")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#2E2C77")}
           >
             Apply for Funding →
           </a>

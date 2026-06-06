@@ -59,10 +59,20 @@ export default function HomePage() {
             Managing ₹20+ crores in corporate funds to accelerate visionary startups accross india's growing industrial corridors.
           </p>
           <div className="mt-6">
-            <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-colors duration-300">
+            <button
+              className="px-6 py-3 text-white rounded-full text-lg font-semibold transition-colors duration-300"
+              style={{ background: "#32E1FC", color: "#2D2754" }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
               Get Funded
             </button>
-            <button className="ml-4 px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full text-lg font-semibold hover:from-gray-800 hover:to-gray-900 transition-colors duration-300">
+            <button
+              className="ml-4 px-6 py-3 text-white rounded-full text-lg font-semibold transition-colors duration-300 border border-white/40"
+              style={{ background: "rgba(46,44,119,0.7)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(45,39,84,0.9)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(46,44,119,0.7)")}
+            >
               Invest with Us
             </button>
           </div>

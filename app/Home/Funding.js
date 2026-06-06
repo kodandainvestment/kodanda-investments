@@ -2,6 +2,10 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+const BRAND = "#32E1FC";
+const BRAND_DARK = "#2D2754";
+const BRAND_PRIMARY = "#2E2C77";
+
 const steps = [
   {
     step: "01", title: "Application", tag: "Getting Started", duration: "2–3 days",
@@ -25,78 +29,18 @@ const steps = [
   },
 ];
 
-// Small circles are placed at: right=0°, bottom=90°, left=180°, top=270°
-// Step i is at angle: i * 90°. To bring step i to right (0°), rotate ring by -i*90°
-const STEP_ANGLES = [0, 90, 180, 270]; // degrees from right, clockwise
-
-function SmallCircle({ index, ringRotation, isActive }) {
-  const angle = STEP_ANGLES[index]; // position on ring in degrees
-  const r = 160; // radius from center
-  const rad = (angle * Math.PI) / 180;
-  const x = Math.round(Math.cos(rad) * r);
-  const y = Math.round(Math.sin(rad) * r);
-
-  // Counter-rotate label so text stays upright
-  return (
-    <motion.div
-      style={{
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        width: 72,
-        height: 72,
-        marginLeft: -36,
-        marginTop: -36,
-        x,
-        y,
-        zIndex: 2,
-      }}
-    >
-      {/* Counter-rotate so text stays upright */}
-      <motion.div
-        style={{
-          width: "100%",
-          height: "100%",
-          rotate: ringRotation ? ringRotation.get ? 
-            // We'll pass a negative of ringRotation via style
-            undefined : 0 : 0,
-          borderRadius: "50%",
-          border: isActive ? "3px solid #c0392b" : "2px dashed #c0392b",
-          background: isActive ? "#c0392b" : "#fff",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          boxShadow: isActive ? "0 0 0 6px rgba(192,57,43,0.18)" : "none",
-          transition: "background 0.3s, border 0.3s, box-shadow 0.3s",
-        }}
-      >
-        <span style={{ fontWeight: 800, fontSize: 13, color: isActive ? "#fff" : "#c0392b", lineHeight: 1 }}>
-          {`0${index + 1}`}
-        </span>
-        <span style={{ fontSize: 9, color: isActive ? "rgba(255,255,255,0.85)" : "#888", marginTop: 2, letterSpacing: "0.05em" }}>
-          STEP
-        </span>
-      </motion.div>
-    </motion.div>
-  );
-}
+const STEP_ANGLES = [0, 90, 180, 270];
 
 export default function Funding() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
 
-  // 4 steps → scroll divided into 4 segments
-  // activeStep: 0-indexed, changes at 0, 0.25, 0.5, 0.75 of scroll
   const ringRotateDeg = useTransform(scrollYProgress, [0, 1], [0, -270]);
-
-  // Derive active step index from scroll
   const activeStep = useTransform(scrollYProgress, (v) => Math.min(3, Math.floor(v * 4)));
 
   return (
-    <div ref={containerRef} style={{ height: "500vh", background: "#0f172a" }}>
-      <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-        {/* Title */}
+    <div ref={containerRef} style={{ height: "500vh", background: "#2D2754" }}>
+      <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", background: "#2D2754" }}>
         <div style={{ position: "absolute", top: 40, left: "50%", transform: "translateX(-50%)", textAlign: "center" }}>
           <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", margin: 0 }}>
             Funding Process
@@ -104,18 +48,14 @@ export default function Funding() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 80, width: "min(90vw, 1100px)" }}>
-
-          {/* LEFT: Rotating Circle */}
           <div style={{ flexShrink: 0, position: "relative", width: 420, height: 420, display: "flex", alignItems: "center", justifyContent: "center" }}>
-
-            {/* Outer dashed orbit ring — rotates */}
             <motion.div
               style={{
                 position: "absolute",
                 width: 380,
                 height: 380,
                 borderRadius: "50%",
-                border: "2px dashed rgba(192,57,43,0.4)",
+                border: `2px dashed ${BRAND}40`,
                 rotate: ringRotateDeg,
                 top: "50%",
                 left: "50%",
@@ -123,11 +63,10 @@ export default function Funding() {
                 marginLeft: -190,
               }}
             >
-              {/* Small circles on the ring — they rotate WITH the ring but labels counter-rotate */}
               {steps.map((_, i) => {
                 const angle = STEP_ANGLES[i];
                 const rad = (angle * Math.PI) / 180;
-                const r = 190; // half of 380
+                const r = 190;
                 const x = Math.round(Math.cos(rad) * r);
                 const y = Math.round(Math.sin(rad) * r);
 
@@ -146,26 +85,25 @@ export default function Funding() {
                       y,
                     }}
                   >
-                    {/* Counter-rotate so label stays readable */}
                     <motion.div
                       style={{
                         width: "100%",
                         height: "100%",
                         rotate: useTransform(ringRotateDeg, (v) => -v),
                         borderRadius: "50%",
-                        background: useTransform(activeStep, (s) => s === i ? "#c0392b" : "#fff"),
-                        border: "2px solid #c0392b",
+                        background: useTransform(activeStep, (s) => s === i ? BRAND : "rgba(255,255,255,0.1)"),
+                        border: `2px solid ${BRAND}`,
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        boxShadow: useTransform(activeStep, (s) => s === i ? "0 0 0 8px rgba(192,57,43,0.2), 0 4px 20px rgba(192,57,43,0.4)" : "none"),
+                        boxShadow: useTransform(activeStep, (s) => s === i ? `0 0 0 8px ${BRAND}33, 0 4px 20px ${BRAND}66` : "none"),
                       }}
                     >
-                      <motion.span style={{ fontWeight: 800, fontSize: 14, color: useTransform(activeStep, (s) => s === i ? "#fff" : "#c0392b"), lineHeight: 1 }}>
+                      <motion.span style={{ fontWeight: 800, fontSize: 14, color: useTransform(activeStep, (s) => s === i ? BRAND_DARK : BRAND), lineHeight: 1 }}>
                         {`0${i + 1}`}
                       </motion.span>
-                      <motion.span style={{ fontSize: 9, color: useTransform(activeStep, (s) => s === i ? "rgba(255,255,255,0.8)" : "#999"), marginTop: 2 }}>
+                      <motion.span style={{ fontSize: 9, color: useTransform(activeStep, (s) => s === i ? `${BRAND_DARK}cc` : "#999"), marginTop: 2 }}>
                         STEP
                       </motion.span>
                     </motion.div>
@@ -174,50 +112,40 @@ export default function Funding() {
               })}
             </motion.div>
 
-            {/* Center circle */}
             <div style={{
               width: 200,
               height: 200,
               borderRadius: "50%",
-              background: "radial-gradient(circle at 35% 35%, #2d3748, #0f172a)",
-              border: "3px solid #c0392b",
+              background: `radial-gradient(circle at 35% 35%, ${BRAND_PRIMARY}, ${BRAND_DARK})`,
+              border: `3px solid ${BRAND}`,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
               zIndex: 3,
-              boxShadow: "0 0 0 8px rgba(15,23,42,0.8), 0 0 40px rgba(192,57,43,0.2)",
+              boxShadow: `0 0 0 8px ${BRAND_DARK}cc, 0 0 40px ${BRAND}33`,
             }}>
               <motion.span style={{ fontSize: 32, marginBottom: 4 }}>
                 {useTransform(activeStep, [0, 1, 2, 3], ["📋", "🔍", "📊", "🤝"])}
               </motion.span>
-              <motion.span style={{
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: 13,
-                textAlign: "center",
-                padding: "0 16px",
-                letterSpacing: "0.05em",
-              }}>
+              <motion.span style={{ color: "#fff", fontWeight: 700, fontSize: 13, textAlign: "center", padding: "0 16px", letterSpacing: "0.05em" }}>
                 {useTransform(activeStep, (s) => steps[Math.round(s)]?.title || steps[0].title)}
               </motion.span>
             </div>
 
-            {/* Connector line from center circle to right active dot */}
             <div style={{
               position: "absolute",
               left: "50%",
               top: "50%",
               width: 90,
               height: 1,
-              background: "linear-gradient(to right, rgba(192,57,43,0.6), rgba(192,57,43,0.1))",
+              background: `linear-gradient(to right, ${BRAND}99, ${BRAND}1a)`,
               transformOrigin: "left center",
               transform: "translateY(-50%)",
               zIndex: 2,
             }} />
           </div>
 
-          {/* RIGHT: Step Description */}
           <div style={{ flex: 1, minWidth: 0, position: "relative", height: 420, display: "flex", alignItems: "center" }}>
             {steps.map((step, i) => (
               <motion.div
@@ -239,30 +167,30 @@ export default function Funding() {
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-                  <span style={{ background: "#c0392b", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", padding: "4px 14px", borderRadius: 999, textTransform: "uppercase" }}>
+                  <span style={{ background: BRAND, color: BRAND_DARK, fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", padding: "4px 14px", borderRadius: 999, textTransform: "uppercase" }}>
                     Step {step.step}
                   </span>
-                  <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 12 }}>{step.tag}</span>
-                  <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 11, marginLeft: "auto" }}>⏱ {step.duration}</span>
+                  <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>{step.tag}</span>
+                  <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 11, marginLeft: "auto" }}>⏱ {step.duration}</span>
                 </div>
 
-                <h2 style={{ color: "#fff", fontSize: "clamp(24px, 3vw, 42px)", fontWeight: 800, margin: "0 0 12px", lineHeight: 1.1 }}>
+                <h2 style={{ color: "#ffffff", fontSize: "clamp(24px, 3vw, 42px)", fontWeight: 800, margin: "0 0 12px", lineHeight: 1.1 }}>
                   {step.title}
                 </h2>
-                <div style={{ width: 48, height: 3, background: "#c0392b", borderRadius: 2, marginBottom: 24 }} />
+                <div style={{ width: 48, height: 3, background: BRAND, borderRadius: 2, marginBottom: 24 }} />
 
                 <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
                   {step.checklist.map((item) => (
-                    <div key={item} style={{ display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 16px", border: "1px solid rgba(255,255,255,0.07)" }}>
-                      <div style={{ width: 20, height: 20, borderRadius: "50%", background: "rgba(192,57,43,0.2)", border: "2px solid #c0392b", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#c0392b" }} />
+                    <div key={item} style={{ display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,0.06)", borderRadius: 10, padding: "10px 16px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                      <div style={{ width: 20, height: 20, borderRadius: "50%", background: `${BRAND}33`, border: `2px solid ${BRAND}`, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ width: 6, height: 6, borderRadius: "50%", background: BRAND }} />
                       </div>
-                      <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "clamp(12px, 1vw, 14px)" }}>{item}</span>
+                      <span style={{ color: "rgba(255,255,255,0.85)", fontSize: "clamp(12px, 1vw, 14px)" }}>{item}</span>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ background: "rgba(192,57,43,0.08)", borderLeft: "3px solid #c0392b", borderRadius: "0 8px 8px 0", padding: "12px 18px" }}>
+                <div style={{ background: `${BRAND}14`, borderLeft: `3px solid ${BRAND}`, borderRadius: "0 8px 8px 0", padding: "12px 18px" }}>
                   <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>
                     💡 {step.note}
                   </p>
@@ -272,7 +200,6 @@ export default function Funding() {
           </div>
         </div>
 
-        {/* Step progress dots */}
         <div style={{ position: "absolute", bottom: 36, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8 }}>
           {steps.map((_, i) => (
             <motion.div
@@ -280,7 +207,7 @@ export default function Funding() {
               style={{
                 height: 6,
                 borderRadius: 3,
-                background: useTransform(activeStep, (s) => Math.round(s) === i ? "#c0392b" : "rgba(255,255,255,0.2)"),
+                background: useTransform(activeStep, (s) => Math.round(s) === i ? BRAND : "rgba(255,255,255,0.15)"),
                 width: useTransform(activeStep, (s) => Math.round(s) === i ? 24 : 6),
               }}
             />

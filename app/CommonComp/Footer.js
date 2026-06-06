@@ -26,17 +26,17 @@ const pages3 = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-indigo-900 text-white overflow-hidden">
-      <div className="absolute top-0 right-48 w-64 h-40 bg-indigo-500 rounded-b-full opacity-70 pointer-events-none" />
-      <div className="absolute top-0 right-32 w-48 h-32 bg-gray-100 rounded-b-full opacity-20 pointer-events-none" />
+    <footer className="relative overflow-hidden text-white" style={{ background: "#2E2C77" }}>
+      <div className="absolute top-0 right-48 w-50 h-46 rounded-b-full opacity-70 pointer-events-none" style={{ background: "#32E1FC" }} />
+      <div className="absolute top-0 right-32 w-44 h-30 bg-white rounded-b-full opacity-10 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row gap-10">
         <div className="md:w-72 shrink-0">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl">
             <span className="text-2xl">≡</span>
-            <span>Kodanda<span className="text-indigo-300">°</span></span>
+            <span>Kodanda<span style={{ color: "#32E1FC" }}>°</span></span>
           </Link>
-          <p className="mt-4 text-sm text-indigo-200 leading-relaxed">
+          <p className="mt-4 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
             Kodanda Investments Pvt. Ltd. is a trusted investment firm focused on
             funding and nurturing innovative startups across diverse sectors,
             helping them grow into sustainable businesses.
@@ -50,7 +50,7 @@ export default function Footer() {
           <ul className="flex flex-col gap-2">
             {pages1.map((p) => (
               <li key={p.label}>
-                <Link href={p.href} className="text-sm text-indigo-200 hover:text-white transition-colors">
+                <Link href={p.href} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.7)" }}>
                   {p.label}
                 </Link>
               </li>
@@ -63,7 +63,7 @@ export default function Footer() {
           <ul className="flex flex-col gap-2">
             {pages2.map((p) => (
               <li key={p.label}>
-                <Link href={p.href} className="text-sm text-indigo-200 hover:text-white transition-colors">
+                <Link href={p.href} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.7)" }}>
                   {p.label}
                 </Link>
               </li>
@@ -76,7 +76,7 @@ export default function Footer() {
           <ul className="flex flex-col gap-2">
             {pages3.map((p) => (
               <li key={p.label}>
-                <Link href={p.href} className="text-sm text-indigo-200 hover:text-white transition-colors">
+                <Link href={p.href} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.7)" }}>
                   {p.label}
                 </Link>
               </li>
@@ -85,16 +85,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-indigo-700 bg-indigo-950">
+      <div className="relative border-t border-white/20" style={{ background: "#2D2754" }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-3 text-sm text-indigo-300">
-            <a href="#" className="hover:text-white transition"><FaTwitter size={16} /></a>
-            <a href="#" className="hover:text-white transition"><FaFacebookF size={16} /></a>
-            <a href="#" className="hover:text-white transition"><FaLinkedinIn size={16} /></a>
-            <a href="#" className="hover:text-white transition"><FaInstagram size={16} /></a>
+          <div className="flex items-center gap-3 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
             <span className="ml-2">© {new Date().getFullYear()} – All rights reserved by Kodanda Investments</span>
           </div>
-          <div className="flex items-center gap-5 text-sm text-indigo-300">
+          <div className="flex items-center gap-5 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
             <a href="#" className="hover:text-white transition">Privacy Policy</a>
             <a href="#" className="hover:text-white transition">Terms & Conditions</a>
             <a href="#" className="hover:text-white transition">Help & Support</a>

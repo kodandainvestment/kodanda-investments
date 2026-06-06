@@ -15,17 +15,20 @@ export default function FAQs() {
   const [open, setOpen] = useState(null);
   return (
     <section className="max-w-3xl mx-auto px-6 py-20">
-      <h2 className="text-3xl font-bold text-indigo-900 text-center mb-3">FAQs</h2>
+      <h2 className="text-3xl font-bold text-center mb-3" style={{ color: "#2D2754" }}>FAQs</h2>
       <p className="text-gray-500 text-center mb-12">Answers to the questions founders ask most.</p>
       <div className="space-y-3">
         {faqs.map((faq, i) => (
-          <div key={i} className="border border-indigo-100 rounded-2xl overflow-hidden">
+          <div key={i} className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(50,225,252,0.2)" }}>
             <button
               onClick={() => setOpen(open === i ? null : i)}
-              className="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-indigo-900 hover:bg-indigo-50 transition"
+              className="w-full flex justify-between items-center px-6 py-4 text-left font-semibold transition"
+              style={{ color: "#2D2754" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(50,225,252,0.05)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
               {faq.q}
-              <ChevronDown size={18} className={`transition-transform ${open === i ? "rotate-180" : ""}`} />
+              <ChevronDown size={18} className={`transition-transform flex-shrink-0 ml-3`} style={{ transform: open === i ? "rotate(180deg)" : "rotate(0deg)", color: "#2E2C77" }} />
             </button>
             {open === i && <p className="px-6 pb-4 text-gray-500 text-sm">{faq.a}</p>}
           </div>

@@ -11,15 +11,15 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section className="bg-indigo-50 py-20">
+    <section className="py-20" style={{ background: "rgba(50,225,252,0.06)" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-indigo-900 text-center mb-3">Industries We Fund</h2>
+        <h2 className="text-3xl font-bold text-center mb-3" style={{ color: "#2D2754" }}>Industries We Fund</h2>
         <p className="text-gray-500 text-center mb-12">We back bold ideas across high-growth sectors.</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           {industries.map((ind) => (
             <div key={ind.name} className="bg-white rounded-2xl p-6 text-center hover:shadow-md transition">
               <div className="text-4xl mb-3">{ind.icon}</div>
-              <p className="font-semibold text-indigo-900 text-sm">{ind.name}</p>
+              <p className="font-semibold text-sm" style={{ color: "#2D2754" }}>{ind.name}</p>
             </div>
           ))}
         </div>

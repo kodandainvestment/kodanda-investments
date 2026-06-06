@@ -9,21 +9,24 @@ const metrics = [
 
 export default function SuccessMetrics() {
   return (
-    <section className="bg-indigo-950 py-20 px-6">
+    <section className="py-20 px-6" style={{ background: "#fff" }}>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <span className="text-indigo-400 text-sm font-semibold tracking-widest uppercase">By the Numbers</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white">Success Metrics</h2>
-          <p className="mt-4 text-white/50 max-w-md mx-auto text-sm">
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>By the Numbers</span>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Success Metrics</h2>
+          <p className="mt-4 text-sm max-w-md mx-auto text-gray-500">
             The results that define our track record and the trust our founders place in us.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {metrics.map(({ value, label, sub }) => (
-            <div key={label} className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
-              <p className="text-4xl font-bold text-indigo-400">{value}</p>
-              <p className="mt-3 text-white font-semibold text-lg">{label}</p>
-              <p className="mt-1 text-white/40 text-sm">{sub}</p>
+            <div key={label} className="rounded-2xl p-8 transition-colors" style={{ background: "#f8f8ff", border: "1px solid rgba(46,44,119,0.12)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(50,225,252,0.08)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#f8f8ff")}
+            >
+              <p className="text-4xl font-bold" style={{ color: "#2E2C77" }}>{value}</p>
+              <p className="mt-3 font-semibold text-lg" style={{ color: "#2D2754" }}>{label}</p>
+              <p className="mt-1 text-sm text-gray-400">{sub}</p>
             </div>
           ))}
         </div>

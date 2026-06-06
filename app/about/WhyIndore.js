@@ -7,26 +7,26 @@ const stats = [
 
 export default function WhyIndore() {
   return (
-    <section className="bg-indigo-950 py-20 px-6">
+    <section className="py-20 px-6" style={{ background: "#fff" }}>
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
         <div>
-          <span className="text-indigo-400 text-sm font-semibold tracking-widest uppercase">Our Home City</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white">Why Indore?</h2>
-          <p className="mt-5 text-white/60 leading-relaxed">
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>Our Home City</span>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Why Indore?</h2>
+          <p className="mt-5 leading-relaxed" style={{ color: "rgba(46,44,119,0.65)" }}>
             Indore is rapidly emerging as Central India's startup capital — combining world-class
             infrastructure, a thriving talent pool, and an entrepreneurial culture that punches well above
             its weight on the national stage.
           </p>
-          <p className="mt-4 text-white/60 leading-relaxed">
+          <p className="mt-4 leading-relaxed" style={{ color: "rgba(46,44,119,0.65)" }}>
             Being headquartered here lets us discover high-conviction founders early, before the capital
             markets catch up — giving our portfolio companies a meaningful head-start.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-6">
           {stats.map(({ value, label }) => (
-            <div key={label} className="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <p className="text-3xl font-bold text-indigo-400">{value}</p>
-              <p className="mt-2 text-sm text-white/60">{label}</p>
+            <div key={label} className="rounded-2xl p-6" style={{ background: "rgba(50,225,252,0.08)", border: "1px solid rgba(46,44,119,0.15)" }}>
+              <p className="text-3xl font-bold" style={{ color: "#2E2C77" }}>{value}</p>
+              <p className="mt-2 text-sm" style={{ color: "rgba(46,44,119,0.65)" }}>{label}</p>
             </div>
           ))}
         </div>

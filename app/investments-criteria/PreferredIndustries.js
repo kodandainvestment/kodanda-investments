@@ -11,11 +11,11 @@ const industries = [
 
 export default function PreferredIndustries() {
   return (
-    <section className="bg-gray-50 py-20 px-6">
+    <section className="py-20 px-6" style={{ background: "#f8f8ff" }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <span className="text-indigo-600 text-sm font-semibold tracking-widest uppercase">Where We Play</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-indigo-950">Preferred Industries</h2>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>Where We Play</span>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Preferred Industries</h2>
           <p className="mt-4 text-gray-500 max-w-xl mx-auto text-sm">
             We concentrate capital in sectors where India has structural tailwinds and where our
             network creates an unfair advantage for founders.
@@ -23,9 +23,12 @@ export default function PreferredIndustries() {
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
           {industries.map(({ emoji, name, desc }) => (
-            <div key={name} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:border-indigo-300 hover:shadow-md transition-all group">
+            <div key={name} className="bg-white rounded-2xl p-6 shadow-sm transition-all group" style={{ border: "1px solid #e5e7eb" }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#32E1FC"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(50,225,252,0.15)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
+            >
               <span className="text-3xl">{emoji}</span>
-              <h3 className="mt-4 font-bold text-indigo-950 text-base group-hover:text-indigo-700 transition-colors">{name}</h3>
+              <h3 className="mt-4 font-bold text-base transition-colors" style={{ color: "#2D2754" }}>{name}</h3>
               <p className="mt-2 text-gray-500 text-sm leading-relaxed">{desc}</p>
             </div>
           ))}

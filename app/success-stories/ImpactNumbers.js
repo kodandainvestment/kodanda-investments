@@ -11,14 +11,14 @@ export default function ImpactNumbers() {
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">
       <div className="text-center mb-14">
-        <span className="text-indigo-600 text-sm font-semibold tracking-widest uppercase">The Numbers</span>
-        <h2 className="mt-3 text-3xl md:text-4xl font-bold text-indigo-950">Impact at a Glance</h2>
+        <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>The Numbers</span>
+        <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Impact at a Glance</h2>
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
         {stats.map(({ value, label, sub }) => (
-          <div key={label} className="text-center p-8 border border-indigo-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow bg-white">
-            <p className="text-4xl font-bold text-indigo-700">{value}</p>
-            <p className="mt-3 font-bold text-indigo-950">{label}</p>
+          <div key={label} className="text-center p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow bg-white" style={{ border: "1px solid rgba(46,44,119,0.12)" }}>
+            <p className="text-4xl font-bold" style={{ color: "#2E2C77" }}>{value}</p>
+            <p className="mt-3 font-bold" style={{ color: "#2D2754" }}>{label}</p>
             <p className="mt-1 text-gray-400 text-sm">{sub}</p>
           </div>
         ))}

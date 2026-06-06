@@ -24,48 +24,42 @@ const stageColor = {
 
 export default function PortfolioGrid() {
   const [active, setActive] = useState("All");
-
   const filtered = active === "All" ? companies : companies.filter((c) => c.industry === active);
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
-      {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-12 justify-center">
         {industries.map((ind) => (
           <button
             key={ind}
             onClick={() => setActive(ind)}
-            className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all ${
-              active === ind
-                ? "bg-indigo-700 text-white border-indigo-700"
-                : "bg-white text-gray-600 border-gray-200 hover:border-indigo-400 hover:text-indigo-600"
-            }`}
+            className="px-5 py-2 rounded-full text-sm font-semibold border transition-all"
+            style={active === ind ? { background: "#2E2C77", color: "#fff", borderColor: "#2E2C77" } : { background: "#fff", color: "#4b5563", borderColor: "#e5e7eb" }}
+            onMouseEnter={(e) => { if (active !== ind) { e.currentTarget.style.borderColor = "#32E1FC"; e.currentTarget.style.color = "#2E2C77"; } }}
+            onMouseLeave={(e) => { if (active !== ind) { e.currentTarget.style.borderColor = "#e5e7eb"; e.currentTarget.style.color = "#4b5563"; } }}
           >
             {ind}
           </button>
         ))}
       </div>
 
-      {/* Grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filtered.map((c) => (
-          <div key={c.name} className="border border-gray-100 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow bg-white group">
+          <div key={c.name} className="rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow bg-white" style={{ border: "1px solid rgba(46,44,119,0.1)" }}>
             <div className="flex items-center gap-4 mb-5">
-              <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm flex-shrink-0">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0" style={{ background: "rgba(50,225,252,0.15)", color: "#2E2C77" }}>
                 {c.logo}
               </div>
               <div>
-                <h3 className="font-bold text-indigo-950 text-lg leading-tight">{c.name}</h3>
+                <h3 className="font-bold text-lg leading-tight" style={{ color: "#2D2754" }}>{c.name}</h3>
                 <p className="text-gray-400 text-xs mt-0.5">{c.location}</p>
               </div>
-              <span className={`ml-auto text-xs font-semibold px-3 py-1 rounded-full ${stageColor[c.stage]}`}>
-                {c.stage}
-              </span>
+              <span className={`ml-auto text-xs font-semibold px-3 py-1 rounded-full ${stageColor[c.stage]}`}>{c.stage}</span>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed">{c.desc}</p>
             <div className="mt-5 flex items-center justify-between">
               <span className="text-xs text-gray-400 font-medium">{c.industry}</span>
-              <span className="text-indigo-700 font-bold text-sm">{c.raised} raised</span>
+              <span className="font-bold text-sm" style={{ color: "#2E2C77" }}>{c.raised} raised</span>
             </div>
           </div>
         ))}

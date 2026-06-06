@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -23,8 +23,8 @@ export default function Navbar() {
   return (
     <nav className="mt-8 rounded-full max-w-[95%] mx-auto relative z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl text-indigo-900">
-          <span className="text-2xl">≡</span> Kodanda<span className="text-indigo-500">°</span>
+        <Link href="/" className="flex items-center gap-2 font-bold text-xl" style={{ color: "#2E2C77" }}>
+          <span className="text-2xl">≡</span> Kodanda<span style={{ color: "#32E1FC" }}>°</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
@@ -34,9 +34,12 @@ export default function Navbar() {
               href={link.href}
               className={`px-3 py-2 text-sm font-medium transition-colors ${
                 pathname === link.href
-                  ? "text-indigo-700 underline underline-offset-4"
-                  : "text-gray-700 hover:text-indigo-700"
+                  ? "underline underline-offset-4"
+                  : "text-gray-700"
               }`}
+              style={pathname === link.href ? { color: "#2E2C77" } : {}}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#2E2C77")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = pathname === link.href ? "#2E2C77" : "#374151")}
             >
               {link.label}
             </Link>
@@ -44,7 +47,12 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          <button className="px-4 py-2 text-sm font-semibold bg-indigo-700 text-white rounded-full hover:bg-indigo-800 transition">
+          <button
+            className="px-4 py-2 text-sm font-semibold text-white rounded-full transition"
+            style={{ background: "#2E2C77" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#2D2754")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#2E2C77")}
+          >
             Get in touch
           </button>
         </div>
@@ -64,14 +72,16 @@ export default function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className={`text-sm font-medium ${
-                pathname === link.href ? "text-indigo-700" : "text-gray-700"
-              }`}
+              className="text-sm font-medium"
+              style={{ color: pathname === link.href ? "#2E2C77" : "#374151" }}
             >
               {link.label}
             </Link>
           ))}
-          <button className="mt-2 w-full py-2 bg-indigo-700 text-white rounded-full text-sm font-semibold">
+          <button
+            className="mt-2 w-full py-2 text-white rounded-full text-sm font-semibold"
+            style={{ background: "#2E2C77" }}
+          >
             Get in touch
           </button>
         </div>
