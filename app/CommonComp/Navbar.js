@@ -9,10 +9,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio-companies" },
   { label: "Funding", href: "/startup-funding" },
-  { label: "Newsletter", href: "/newsletter" },
-  { label: "Investments", href: "/investments-criteria" },
-  { label: "Blog", href: "/blog" },
-  { label: "Success Stories", href: "/success-stories" },
+  { label: "Services", href: "/service" },
   { label: "Contact", href: "/contact" },
 ];
 

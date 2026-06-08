@@ -3,18 +3,22 @@ import { FaTwitter, FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/f
 
 const pages1 = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Portfolio Companies", href: "/portfolio-companies" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Newsletter", href: "/newsletter" },
+  { label: "Investments", href: "/investments-criteria" },
+  { label: "Success Stories", href: "/success-stories" },
 ];
 
 const pages2 = [
-  { label: "Financial Advisory", href: "/startup-funding" },
-  { label: "Retirement Planning", href: "/investments-criteria" },
-  { label: "Financial Analysis", href: "/success-stories" },
-  { label: "Financial Reporting", href: "/newsletter" },
-  { label: "Financial Planning", href: "/startup-funding" },
+  { label: "Financial Advisory", href: "/services/financial-advisory" },
+  { label: "Retirement Planning", href: "/services/retirement-planning" },
+  { label: "Financial Analysis", href: "/services/financial-analysis" },
+  { label: "Financial Reporting", href: "/services/financial-reporting" },
+  { label: "Financial Planning", href: "/services/financial-planning" },
+  { label: "Budgeting", href: "/services/budgeting" },
+  { label: "Financial Accounting", href: "/services/financial-accounting" },
+  { label: "Business Consulting", href: "/services/business-consulting" },
+  { label: "Financial Consulting", href: "/services/financial-consulting" },
 ];
 
 const pages3 = [
