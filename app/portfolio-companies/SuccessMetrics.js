@@ -1,3 +1,5 @@
+"use client";
+
 const metrics = [
   { value: "₹20 Cr+", label: "Capital Deployed", sub: "Across all funds" },
   { value: "30+", label: "Active Portfolio Cos.", sub: "Across 6 sectors" },

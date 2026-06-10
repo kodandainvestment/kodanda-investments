@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
 import { XCircle } from "lucide-react";
 
 const avoidList = [
@@ -9,10 +11,93 @@ const avoidList = [
   { title: "Misaligned Founders", desc: "Teams where co-founders are already in dispute or where equity splits signal unresolved conflicts." },
 ];
 
+function AvoidCard({ title, desc, index }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.95)",
+        transition: `opacity 0.5s ease ${index * 100}ms, transform 0.5s ease ${index * 100}ms`,
+        background: hovered ? "rgba(239,68,68,0.1)" : "#fef2f2",
+        border: hovered ? "1px solid rgba(239,68,68,0.5)" : "1px solid #fee2e2",
+        boxShadow: hovered ? "0 8px 30px rgba(239,68,68,0.15)" : "none",
+        borderRadius: "1rem",
+        padding: "1.5rem",
+        display: "flex",
+        gap: "1rem",
+        cursor: "default",
+        transitionProperty: "opacity, transform, background, border, box-shadow",
+        transitionDuration: `0.5s, 0.5s, 0.25s, 0.25s, 0.25s`,
+        transitionTimingFunction: "ease",
+        transitionDelay: `${index * 100}ms, ${index * 100}ms, 0ms, 0ms, 0ms`,
+      }}
+    >
+      <div style={{
+        // transform: hovered ? "rotate(90deg) scale(1.2)" : "rotate(0deg) scale(1)",
+        transition: "transform 0.3s ease",
+        flexShrink: 0,
+        marginTop: "2px",
+      }}>
+        <XCircle size={22} color={hovered ? "#ef4444" : "#f87171"} />
+      </div>
+      <div>
+        <h3 style={{
+          fontWeight: "700",
+          fontSize: "0.875rem",
+          color: hovered ? "#b91c1c" : "#991b1b",
+          transition: "color 0.25s ease",
+        }}>{title}</h3>
+        <p style={{
+          marginTop: "6px",
+          fontSize: "0.875rem",
+          lineHeight: "1.6",
+          color: "rgba(153,27,27,0.7)",
+        }}>{desc}</p>
+      </div>
+    </div>
+  );
+}
+
 export default function WhatWeAvoid() {
+  const headingRef = useRef(null);
+  const [headingVisible, setHeadingVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setHeadingVisible(true); },
+      { threshold: 0.3 }
+    );
+    if (headingRef.current) observer.observe(headingRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">
-      <div className="text-center mb-14">
+      <div
+        ref={headingRef}
+        className="text-center mb-14"
+        style={{
+          opacity: headingVisible ? 1 : 0,
+          transform: headingVisible ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
+      >
         <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>Not a Fit</span>
         <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>What We Avoid</h2>
         <p className="mt-4 text-gray-500 max-w-lg mx-auto text-sm">
@@ -20,14 +105,8 @@ export default function WhatWeAvoid() {
         </p>
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {avoidList.map(({ title, desc }) => (
-          <div key={title} className="flex gap-4 p-6 bg-red-50 border border-red-100 rounded-2xl">
-            <XCircle size={22} className="text-red-400 flex-shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-bold text-red-800 text-sm">{title}</h3>
-              <p className="mt-1.5 text-red-700/70 text-sm leading-relaxed">{desc}</p>
-            </div>
-          </div>
+        {avoidList.map(({ title, desc }, i) => (
+          <AvoidCard key={title} title={title} desc={desc} index={i} />
         ))}
       </div>
     </section>

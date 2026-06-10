@@ -1,3 +1,4 @@
+"use client";
 const trends = [
   { sector: "Fintech", trend: "↑ 42%", detail: "YoY deal volume in B2B payments & lending for MSMEs in Tier-2 cities.", sentiment: "bullish" },
   { sector: "Deep Tech", trend: "↑ 68%", detail: "Funding in edge AI and semiconductor startups since PLI scheme announcement.", sentiment: "bullish" },

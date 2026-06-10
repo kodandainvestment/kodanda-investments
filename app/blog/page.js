@@ -1,10 +1,11 @@
 "use client";
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Clock, User, Tag } from "lucide-react";
+import { ArrowRight, Clock, User } from "lucide-react";
+import Image from "next/image";
 import Navbar from "../CommonComp/Navbar";
 
-const ITEM_WIDTH = 380;
+const ITEM_WIDTH = 420;
 const GAP = 28;
 
 const tags = ["All", "Startup", "Funding", "Investment", "Growth", "Strategy", "Market"];
@@ -33,15 +34,14 @@ function HorizontalScrollGrid({ filtered, activeTag }) {
   }
 
   return (
-    <div ref={containerRef} style={{ height: `${filtered.length * 100}vh` }} className="relative">
-      <div className="sticky top-0 h-screen flex items-center overflow-visible" style={{ width: ITEM_WIDTH, margin: "0 auto" }}>
+    <div ref={containerRef} style={{ height: `${filtered.length * 40}vh` }} className="relative">
+      <div className="sticky top-0 h-[90vh] flex items-center overflow-visible" style={{ width: ITEM_WIDTH, margin: "0 auto" }}>
         <motion.div className="flex" style={{ x, gap: GAP }}>
           {filtered.map((blog, i) => (
             <div key={blog.id} style={{ width: ITEM_WIDTH, flexShrink: 0 }} className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col">
               <div className={`h-2 bg-gradient-to-r ${blog.color}`} />
-              <div className={`h-44 bg-gradient-to-br ${blog.color} flex items-center justify-center relative overflow-hidden`}>
-                <span className="text-white/10 text-8xl font-black select-none">0{i + 1}</span>
-                <Tag size={36} className="text-white/20 absolute" />
+              <div className="h-64 relative overflow-hidden">
+                <Image src="/about-us.png" alt="blog cover" fill className="object-cover" />
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <span className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: "#2E2C77" }}>{blog.tag}</span>
@@ -127,9 +127,9 @@ export default function BlogPage() {
           ))}
         </div>
         <p className="text-sm text-gray-400 mb-2">↓ Scroll to explore articles</p>
-      </div>
 
       <HorizontalScrollGrid filtered={filtered} activeTag={activeTag} />
+      </div>
     </div>
   );
 }

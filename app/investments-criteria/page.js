@@ -28,11 +28,11 @@ export default function InvestmentsPage() {
           </p>
         </div>
       </div>
-
-      <IdealStartupProfile />
-      <PreferredIndustries />
+      
       <EvaluationProcess />
+      <IdealStartupProfile />
       <WhatWeAvoid />
+      <PreferredIndustries />
       <ReadinessChecklist />
     </div>
   );

@@ -1,8 +1,6 @@
 import Navbar from "../CommonComp/Navbar";
 import Benefits from "./Benefits";
-import InvestmentInsights from "./InvestmentInsights";
-import MarketTrends from "./MarketTrends";
-import StartupOpportunities from "./StartupOpportunities";
+import BenefitsScroll from "./BenefitsScroll";
 import SubscribeForm from "./SubscribeForm";
 
 export const metadata = { title: "Newsletter – Kodanda Investments" };
@@ -32,9 +30,7 @@ export default function NewsletterPage() {
       </div>
 
       <Benefits />
-      <InvestmentInsights />
-      <MarketTrends />
-      <StartupOpportunities />
+      <BenefitsScroll />
       <div id="subscribe">
         <SubscribeForm />
       </div>

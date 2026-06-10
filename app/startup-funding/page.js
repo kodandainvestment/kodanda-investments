@@ -22,8 +22,8 @@ export default function FundingPage() {
       </div>
       <FundingStages />
       <Industries />
-      <FundingProcess />
       <FounderBenefits />
+      <FundingProcess />
       <FAQs />
       <FundingForm />
     </div>
