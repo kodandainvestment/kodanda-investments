@@ -10,15 +10,15 @@ const pages1 = [
 ];
 
 const pages2 = [
-  { label: "Financial Advisory", href: "/services/financial-advisory" },
-  { label: "Retirement Planning", href: "/services/retirement-planning" },
-  { label: "Financial Analysis", href: "/services/financial-analysis" },
-  { label: "Financial Reporting", href: "/services/financial-reporting" },
-  { label: "Financial Planning", href: "/services/financial-planning" },
-  { label: "Budgeting", href: "/services/budgeting" },
-  { label: "Financial Accounting", href: "/services/financial-accounting" },
-  { label: "Business Consulting", href: "/services/business-consulting" },
-  { label: "Financial Consulting", href: "/services/financial-consulting" },
+  { label: "Financial Advisory", href: "/service/financial-advisory" },
+  { label: "Retirement Planning", href: "/service/retirement-planning" },
+  { label: "Financial Analysis", href: "/service/financial-analysis" },
+  { label: "Financial Reporting", href: "/service/financial-reporting" },
+  { label: "Financial Planning", href: "/service/financial-planning" },
+  { label: "Budgeting", href: "/service/budgeting" },
+  { label: "Financial Accounting", href: "/service/financial-accounting" },
+  { label: "Business Consulting", href: "/service/business-consulting" },
+  { label: "Financial Consulting", href: "/service/financial-consulting" },
 ];
 
 const pages3 = [

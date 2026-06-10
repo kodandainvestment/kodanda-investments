@@ -28,21 +28,67 @@ const slides = [
     title: "Why Choose Us",
     bg: "#2D2754",
     content: (
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, maxWidth: 680 }}>
-        {[
-          ["✦", "Proven Track Record", "50+ investments with 5x average returns"],
-          ["✦", "Strategic Network", "Access to industry leaders and advisors"],
-          ["✦", "Flexible Capital", "Customized solutions for your growth stage"],
-          ["✦", "Hands-on Mentorship", "Support from experienced entrepreneurs"],
-        ].map(([icon, title, desc]) => (
-          <div key={title} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-            <span style={{ color: "#32E1FC", fontSize: 18, flexShrink: 0, marginTop: 2 }}>{icon}</span>
-            <div>
-              <p style={{ color: "#fff", fontWeight: 700, fontSize: 16, margin: 0 }}>{title}</p>
-              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, margin: "4px 0 0" }}>{desc}</p>
+      <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
+
+        {/* Subtitle */}
+        <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 18, maxWidth: 600, margin: "0 auto 56px", textAlign: "center", lineHeight: 1.7 }}>
+          We don't just fund startups — we build lasting partnerships rooted in trust, strategy, and shared success.
+        </p>
+
+        {/* Top stat bar */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden", marginBottom: 48 }}>
+          {[
+            ["₹500Cr+", "Capital Deployed"],
+            ["50+", "Startups Funded"],
+            ["5x", "Average Returns"],
+            ["12+", "Years of Trust"],
+          ].map(([val, label]) => (
+            <div key={label} style={{ padding: "32px 24px", background: "rgba(255,255,255,0.04)", textAlign: "center" }}>
+              <p style={{ color: "#32E1FC", fontSize: "clamp(28px,3vw,40px)", fontWeight: 800, margin: 0, lineHeight: 1 }}>{val}</p>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, margin: "8px 0 0", letterSpacing: "0.05em", textTransform: "uppercase" }}>{label}</p>
             </div>
+          ))}
+        </div>
+
+        {/* Feature cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24, marginBottom: 40 }}>
+          {[
+            ["✦", "Proven Track Record", "With 50+ successful investments and a 5x average return, our portfolio speaks for itself. We've backed winners across fintech, healthtech, agritech, and deep-tech."],
+            ["⬡", "Strategic Network", "Gain instant access to our curated network of 200+ industry leaders, seasoned advisors, and global investors who actively open doors for our portfolio companies."],
+            ["◈", "Flexible Capital", "Whether you're pre-revenue or scaling to Series B, we tailor our capital solutions — equity, convertible notes, or hybrid instruments — to match your exact growth stage."],
+            // ["✺", "Hands-on Mentorship", "Our investment team includes ex-founders and domain experts who roll up their sleeves alongside you — from product-market fit to IPO readiness."],
+            // ["◉", "Due Diligence You Trust", "Our rigorous but founder-friendly evaluation ensures every deal is built on transparency, fair valuation, and mutual respect — no surprises post-term sheet."],
+            // ["⬢", "Long-term Partnership", "We don't exit at Series A. Our rolling support model means we stay invested in your journey — operationally, financially, and strategically."],
+          ].map(([icon, title, desc]) => (
+            <div
+              key={title}
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 20,
+                padding: "32px 28px",
+                transition: "border-color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(50,225,252,0.4)")}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
+            >
+              <span style={{ fontSize: 24, color: "#32E1FC", display: "block", marginBottom: 16 }}>{icon}</span>
+              <p style={{ color: "#fff", fontWeight: 700, fontSize: 17, margin: "0 0 10px" }}>{title}</p>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 14, lineHeight: 1.75, margin: 0 }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA strip */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(50,225,252,0.07)", border: "1px solid rgba(50,225,252,0.2)", borderRadius: 20, padding: "28px 40px", flexWrap: "wrap", gap: 20 }}>
+          <div>
+            <p style={{ color: "#fff", fontWeight: 700, fontSize: 20, margin: 0 }}>Ready to scale your startup?</p>
+            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, margin: "4px 0 0" }}>Join 50+ founders who chose Kodanda as their growth partner.</p>
           </div>
-        ))}
+          <a href="/startup-funding" style={{ padding: "14px 36px", borderRadius: 999, background: "#32E1FC", color: "#2D2754", fontWeight: 700, fontSize: 15, textDecoration: "none", whiteSpace: "nowrap" }}>
+            Apply for Funding →
+          </a>
+        </div>
       </div>
     ),
   },
@@ -99,12 +145,25 @@ export default function Featured() {
         <section
           key={slide.id}
           style={{
-            background: slide.bg,
             minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             padding: "80px 10vw",
+            alignItems: slide.id === 2 ? "center" : slide.id === 3 ? "flex-end" : "flex-start",
+            textAlign: slide.id === 2 ? "center" : slide.id === 3 ? "right" : "left",
+            position: "relative",
+            // Fixed bg image for slides 1 and 3
+            ...(slide.id === 1 || slide.id === 3
+              ? {
+                  backgroundImage: "url('/hero-img.jpeg')",
+                  backgroundAttachment: "fixed",
+                  backgroundSize: "30% 50%",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: slide.id === 1 ? "90% center" : "10% center",
+                  backgroundColor: slide.bg,
+                }
+              : { background: slide.bg }),
           }}
         >
           <span style={{ fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: slide.bg === "#ffffff" ? "#2E2C77" : "#32E1FC", opacity: 0.7, marginBottom: 16 }}>
