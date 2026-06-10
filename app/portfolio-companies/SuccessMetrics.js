@@ -184,12 +184,12 @@ function MetricCard({ value, label, sub, index }) {
 
 export default function SuccessMetrics() {
   return (
-    <section className="py-20 px-6" style={{ background: "#fff" }}>
+    <section className="bg-indigo-950 py-20 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#2E2C77" }}>By the Numbers</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Success Metrics</h2>
-          <p className="mt-4 text-sm max-w-md mx-auto text-gray-500">
+          <span className="text-indigo-400 text-sm font-semibold tracking-widest uppercase">By the Numbers</span>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white">Success Metrics</h2>
+          <p className="mt-4 text-white/50 max-w-md mx-auto text-sm">
             The results that define our track record and the trust our founders place in us.
           </p>
         </div>
