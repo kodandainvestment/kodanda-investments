@@ -1,20 +1,126 @@
+
+// "use client";
+
 // import Navbar from "../CommonComp/Navbar";
+// import { motion } from "framer-motion";
 
 // export default function Hero() {
 //   return (
 //     <div className="relative w-full min-h-[60vh] bg-indigo-950 overflow-hidden">
 //       <Navbar />
+
+//       {/* Existing Gradient */}
 //       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_#4338ca55,_transparent_60%)]" />
+
+//       {/* 3D Floating Orbs */}
+//       <motion.div
+//         animate={{
+//           y: [0, -40, 0],
+//           x: [0, 30, 0],
+//           rotate: [0, 180, 360],
+//         }}
+//         transition={{
+//           duration: 18,
+//           repeat: Infinity,
+//           ease: "linear",
+//         }}
+//         className="absolute top-10 left-10 w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl"
+//       />
+
+//       <motion.div
+//         animate={{
+//           y: [0, 35, 0],
+//           x: [0, -25, 0],
+//           rotate: [360, 180, 0],
+//         }}
+//         transition={{
+//           duration: 22,
+//           repeat: Infinity,
+//           ease: "linear",
+//         }}
+//         className="absolute bottom-10 right-10 w-80 h-80 rounded-full bg-indigo-400/10 blur-3xl"
+//       />
+
+//       {/* Floating 3D Shapes */}
+//       <motion.div
+//         animate={{
+//           rotateY: [0, 360],
+//           rotateX: [0, 360],
+//           y: [0, -25, 0],
+//         }}
+//         transition={{
+//           duration: 10,
+//           repeat: Infinity,
+//           ease: "linear",
+//         }}
+//         style={{
+//           transformStyle: "preserve-3d",
+//         }}
+//         className="
+//           absolute
+//           top-32
+//           right-1/4
+//           w-20
+//           h-20
+//           border
+//           border-indigo-400/20
+//           rotate-45
+//         "
+//       />
+
+//       <motion.div
+//         animate={{
+//           rotateY: [360, 0],
+//           rotateX: [360, 0],
+//           y: [0, 30, 0],
+//         }}
+//         transition={{
+//           duration: 14,
+//           repeat: Infinity,
+//           ease: "linear",
+//         }}
+//         style={{
+//           transformStyle: "preserve-3d",
+//         }}
+//         className="
+//           absolute
+//           bottom-24
+//           left-1/4
+//           w-16
+//           h-16
+//           rounded-full
+//           border
+//           border-indigo-300/20
+//         "
+//       />
+
+//       {/* Grid Effect */}
+//       <div
+//         className="absolute inset-0 opacity-[0.04]"
+//         style={{
+//           backgroundImage: `
+//             linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+//             linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)
+//           `,
+//           backgroundSize: "60px 60px",
+//         }}
+//       />
+
+//       {/* Content - Unchanged */}
 //       <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] text-center px-6 pt-8 pb-16">
 //         <span className="text-indigo-400 text-sm font-semibold tracking-widest uppercase mb-4">
 //           About Kodanda Investments
 //         </span>
+
 //         <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight max-w-3xl">
-//           Fueling India's <span className="text-indigo-400">Next Wave</span> of Innovation
+//           Fueling India's{" "}
+//           <span className="text-indigo-400">Next Wave</span> of Innovation
 //         </h1>
+
 //         <p className="mt-5 text-white/60 text-lg max-w-xl">
-//           A Indore-based investment firm committed to discovering and scaling visionary founders
-//           across India's fastest-growing industrial corridors.
+//           A Indore based investment firm committed to discovering and scaling
+//           visionary founders across India's fastest growing industrial
+//           corridors.
 //         </p>
 //       </div>
 //     </div>
@@ -25,114 +131,225 @@
 "use client";
 
 import Navbar from "../CommonComp/Navbar";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Hero() {
-  const ref = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-
-  // Premium scroll-driven line-by-line reveal
-  // Each line transitions from 15% opacity to 100% opacity
-  // Once revealed, lines STAY at 100% (no fade back)
-
-  // Line 1: About Kodanda Investments
-  const opacity1 = useTransform(
-    scrollYProgress,
-    [0, 0.12, 0.98, 1],
-    [0.15, 1, 1, 1]
-  );
-
-  // Line 2: Fueling India's Next Wave
-  const opacity2 = useTransform(
-    scrollYProgress,
-    [0.12, 0.32, 0.98, 1],
-    [0.1, 1, 1, 1]
-  );
-
-  // Line 3: of Innovation
-  const opacity3 = useTransform(
-    scrollYProgress,
-    [0.32, 0.52, 0.98, 1],
-    [0.1, 1, 1, 1]
-  );
-
-  // Line 4: Indore-based investment firm
-  const opacity4 = useTransform(
-    scrollYProgress,
-    [0.52, 0.72, 0.98, 1],
-    [0.1, 1, 1, 1]
-  );
-
-  // Line 5: Backing visionary founders
-  const opacity5 = useTransform(
-    scrollYProgress,
-    [0.72, 1, 1, 1],
-    [0.1, 1, 1, 1]
-  );
-
   return (
-    <>
+    <div className="relative w-full min-h-[60vh] bg-indigo-950 overflow-hidden">
       <Navbar />
-      <div
-        ref={ref}
-        className="relative w-full h-[600px] bg-gradient-to-b from-indigo-950 via-indigo-950 to-indigo-900 overflow-hidden"
+
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_#4338ca55,_transparent_60%)]" />
+
+      {/* Animated Grid */}
+      <motion.div
+        animate={{
+          backgroundPosition: ["0px 0px", "80px 80px"],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        className="absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Animated Growth Line */}
+      <svg
+        className="absolute inset-0 w-full h-full opacity-20"
+        viewBox="0 0 1440 600"
+        preserveAspectRatio="none"
       >
-        {/* Radial gradient background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_#4338ca55,_transparent_60%)] pointer-events-none" />
+        <motion.path
+          d="M0 500 C200 450 350 320 550 300 C800 260 1000 180 1440 80"
+          fill="none"
+          stroke="#818cf8"
+          strokeWidth="4"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatDelay: 1,
+          }}
+        />
+      </svg>
 
-        {/* Sticky pinned section */}
-        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-          {/* Content container */}
-          <div className="relative z-10 w-full px-4 md:px-6 lg:px-8 flex items-center justify-center">
-            <div className="flex flex-col items-center justify-center text-center max-w-4xl w-full">
-              {/* Subtitle */}
-              <motion.span
-                style={{ opacity: opacity1 }}
-                className="text-indigo-400 text-xs md:text-sm font-semibold tracking-widest uppercase mb-6 md:mb-8 block will-change-opacity"
-              >
-                About Kodanda Investments
-              </motion.span>
+      {/* Floating Portfolio Card */}
+      <motion.div
+        animate={{
+          y: [0, -20, 0],
+          rotateY: [0, 10, 0],
+          rotateX: [0, -4, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{
+          transformStyle: "preserve-3d",
+        }}
+        className="
+          hidden lg:block
+          absolute
+          right-16
+          top-24
+          w-64
+          rounded-3xl
+          border
+          border-white/10
+          bg-white/5
+          backdrop-blur-xl
+          p-6
+        "
+      >
+        <p className="text-white/50 text-xs uppercase tracking-widest">
+          Portfolio Growth
+        </p>
 
-              {/* Main Heading - Line 1 */}
-              <motion.h1
-                style={{ opacity: opacity2 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-4 md:mb-6 block will-change-opacity"
-              >
-                Fueling India's
-              </motion.h1>
-
-              {/* Main Heading - Line 2 (highlight) */}
-              <motion.h1
-                style={{ opacity: opacity3 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 md:mb-6 block will-change-opacity"
-              >
-                Next Wave
-              </motion.h1>
-
-              {/* Subheading - Line 1 */}
-              <motion.p
-                style={{ opacity: opacity4 }}
-                className="text-2xl md:text-3xl lg:text-4xl text-white font-medium max-w-3xl mb-8 md:mb-12 block will-change-opacity"
-              >
-                of Innovation
-              </motion.p>
-
-              {/* Description */}
-              <motion.p
-                style={{ opacity: opacity5 }}
-                className="text-lg md:text-xl text-white max-w-2xl leading-relaxed block will-change-opacity"
-              >
-                An Indore-based investment firm committed to discovering and scaling visionary founders across India's fastest-growing industrial corridors
-              </motion.p>
-            </div>
-          </div>
+        <div className="mt-5 flex items-end gap-2 h-24">
+          <div className="w-5 h-8 bg-indigo-500/60 rounded-t-md" />
+          <div className="w-5 h-12 bg-indigo-500/60 rounded-t-md" />
+          <div className="w-5 h-16 bg-indigo-500/70 rounded-t-md" />
+          <div className="w-5 h-20 bg-indigo-400/80 rounded-t-md" />
+          <div className="w-5 h-24 bg-indigo-300 rounded-t-md" />
         </div>
+
+        <p className="mt-5 text-white text-3xl font-bold">
+          ₹235 Cr+
+        </p>
+
+        <p className="text-white/40 text-sm">
+          Total Portfolio Value
+        </p>
+      </motion.div>
+
+      {/* Floating Founder Card */}
+      <motion.div
+        animate={{
+          y: [0, 25, 0],
+          rotateY: [0, -10, 0],
+          rotateX: [0, 5, 0],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{
+          transformStyle: "preserve-3d",
+        }}
+        className="
+          hidden lg:block
+          absolute
+          left-16
+          bottom-14
+          w-56
+          rounded-3xl
+          border
+          border-white/10
+          bg-white/5
+          backdrop-blur-xl
+          p-6
+        "
+      >
+        <p className="text-white/50 text-xs uppercase tracking-widest">
+          Founder Success
+        </p>
+
+        <p className="mt-3 text-5xl font-bold text-indigo-400">
+          92%
+        </p>
+
+        <div className="mt-5 h-2 rounded-full bg-white/10 overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "92%" }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+            className="h-full bg-indigo-400"
+          />
+        </div>
+
+        <p className="mt-3 text-white/40 text-sm">
+          Founder Satisfaction
+        </p>
+      </motion.div>
+
+      {/* Floating Glow */}
+      <motion.div
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+        }}
+        className="
+          absolute
+          top-10
+          left-10
+          h-96
+          w-96
+          rounded-full
+          bg-indigo-500/10
+          blur-[120px]
+        "
+      />
+
+      <motion.div
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.15, 0.3, 0.15],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+        }}
+        className="
+          absolute
+          bottom-0
+          right-0
+          h-[400px]
+          w-[400px]
+          rounded-full
+          bg-indigo-400/10
+          blur-[140px]
+        "
+      />
+
+      {/* Content (unchanged) */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] text-center px-6 pt-8 pb-16">
+        <span className="text-indigo-400 text-sm font-semibold tracking-widest uppercase mb-4">
+          About Kodanda Investments
+        </span>
+
+        <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight max-w-3xl">
+          Fueling India's{" "}
+          <span className="text-indigo-400">
+            Next Wave
+          </span>{" "}
+          of Innovation
+        </h1>
+
+        <p className="mt-5 text-white/60 text-lg max-w-xl">
+          A Indore based investment firm committed to discovering and scaling
+          visionary founders across India's fastest growing industrial
+          corridors.
+        </p>
       </div>
-    </>
+    </div>
   );
 }

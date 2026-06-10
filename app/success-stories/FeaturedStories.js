@@ -1,3 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+
 const stories = [
   {
     logo: "CS", company: "CloudStack", tag: "SaaS · Series B Exit",
@@ -33,31 +38,252 @@ export default function FeaturedStories() {
         <h2 className="mt-3 text-3xl md:text-4xl font-bold" style={{ color: "#2D2754" }}>Featured Stories</h2>
         <p className="mt-4 text-gray-500 text-sm max-w-md mx-auto">The companies that define what we mean by founder-first investing.</p>
       </div>
-      <div className="flex flex-col gap-10">
-        {stories.map(({ logo, company, tag, headline, story, founder, metrics, accent }, i) => (
-          <div key={company} className={`grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden shadow-sm border border-gray-100 ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
-            <div className={`bg-gradient-to-br ${accent} p-10 flex flex-col justify-between`}>
-              <div>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center font-bold text-lg mb-6" style={{ background: "rgba(255,255,255,0.2)", color: "#fff" }}>{logo}</div>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.65)" }}>{tag}</p>
-                <h3 className="text-white font-bold text-2xl leading-snug">{headline}</h3>
-              </div>
-              <div className="flex gap-8 mt-8">
-                {metrics.map(({ label, value }) => (
-                  <div key={label}>
-                    <p className="text-white font-bold text-2xl">{value}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.6)" }}>{label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-white p-10 flex flex-col justify-center">
-              <p className="text-gray-600 leading-relaxed text-sm">{story}</p>
-              <p className="mt-6 font-semibold text-sm" style={{ color: "#2E2C77" }}>— {founder}</p>
-            </div>
+    <div className="flex flex-col gap-16">
+  {stories.map(
+    (
+      {
+        logo,
+        company,
+        tag,
+        headline,
+        story,
+        founder,
+        metrics,
+        accent,
+      },
+      i
+    ) => (
+      <motion.div
+        key={company}
+        initial={{
+          opacity: 0,
+          x: i % 2 === 0 ? -100 : 100,
+          scale: 0.95,
+        }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+          scale: 1,
+        }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{
+          duration: 0.9,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        whileHover={{
+          y: -8,
+        }}
+        className={`
+          relative
+          overflow-hidden
+          rounded-[32px]
+          border
+          border-gray-100
+          bg-white
+          shadow-[0_20px_60px_rgba(15,23,42,0.08)]
+          hover:shadow-[0_30px_90px_rgba(79,70,229,0.15)]
+          transition-all
+          duration-700
+          grid
+          md:grid-cols-2
+          ${
+            i % 2 === 1
+              ? "md:[&>*:first-child]:order-2"
+              : ""
+          }
+        `}
+      >
+        {/* Background Watermark */}
+
+        <div
+          className="
+            absolute
+            right-6
+            top-6
+            text-[180px]
+            font-black
+            text-black/[0.03]
+            leading-none
+            pointer-events-none
+            select-none
+          "
+        >
+          {logo}
+        </div>
+
+        {/* Gradient Side */}
+
+        <div
+          className={`relative bg-gradient-to-br ${accent} p-10 lg:p-12 flex flex-col justify-between overflow-hidden`}
+        >
+          {/* Floating Glow */}
+
+          <motion.div
+            animate={{
+              y: [0, -40, 0],
+              x: [0, 20, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="
+              absolute
+              -top-20
+              -right-20
+              w-72
+              h-72
+              rounded-full
+              bg-white/10
+              blur-3xl
+            "
+          />
+
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="
+              absolute
+              bottom-0
+              left-0
+              w-56
+              h-56
+              rounded-full
+              bg-white/5
+              blur-3xl
+            "
+          />
+
+          <div className="relative z-10">
+            <motion.div
+              whileHover={{
+                rotate: 8,
+                scale: 1.08,
+              }}
+              className="
+                w-16
+                h-16
+                rounded-2xl
+                bg-white/20
+                backdrop-blur-md
+                flex
+                items-center
+                justify-center
+                text-white
+                font-bold
+                text-lg
+                mb-6
+              "
+            >
+              {logo}
+            </motion.div>
+
+            <p className="text-white/70 text-xs tracking-widest uppercase font-semibold">
+              {tag}
+            </p>
+
+            <h3 className="mt-3 text-white text-3xl lg:text-4xl font-bold leading-tight">
+              {headline}
+            </h3>
           </div>
-        ))}
-      </div>
+
+          <div className="grid grid-cols-3 gap-4 mt-10 relative z-10">
+            {metrics.map(({ label, value }, idx) => (
+              <motion.div
+                key={label}
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  delay: idx * 0.15,
+                }}
+                className="
+                  rounded-xl
+                  bg-white/10
+                  backdrop-blur-md
+                  p-4
+                "
+              >
+                <p className="text-white font-bold text-xl">
+                  {value}
+                </p>
+
+                <p className="text-white/60 text-xs mt-1">
+                  {label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Content Side */}
+
+        <div className="p-10 lg:p-12 flex flex-col justify-center">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="
+              text-gray-600
+              leading-relaxed
+              text-base
+            "
+          >
+            {story}
+          </motion.p>
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.4,
+            }}
+            className="
+              mt-8
+              inline-flex
+              items-center
+              gap-3
+            "
+          >
+            <div className="h-10 w-10 rounded-full bg-indigo-100" />
+
+            <div>
+              <p className="text-indigo-700 font-semibold">
+                {founder}
+              </p>
+
+              <p className="text-xs text-gray-400">
+                Portfolio Founder
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    )
+  )}
+</div>
     </section>
   );
 }
+
+
+
+
