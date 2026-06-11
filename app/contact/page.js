@@ -32,7 +32,7 @@ export default function ContactPage() {
       <div className="relative overflow-hidden" style={{ background: "#000000", minHeight: "600px" }}>
         <div style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
           <Lightfall
-            colors={["#A6C8FF", "#ffffff", "#5B9FFF"]}
+            colors={["#A6C8FF", "#ffffff", "#006aff"]}
             backgroundColor="#000814"
             speed={0.5}
             streakCount={2}
