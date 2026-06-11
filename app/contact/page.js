@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
 import Navbar from "../CommonComp/Navbar";
+import Lightfall from "../Animations/Lightfall";
 
 const contactInfo = [
   { icon: <Phone size={22} />, title: "Call Us", detail: "+91 98765 43210", sub: "Mon – Fri, 9am – 6pm" },
@@ -28,14 +29,31 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="relative overflow-hidden" style={{ background: "#2E2C77" }}>
+      <div className="relative overflow-hidden" style={{ background: "#000000", minHeight: "600px" }}>
+        <div style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+          <Lightfall
+            colors={["#A6C8FF", "#ffffff", "#006aff"]}
+            backgroundColor="#000814"
+            speed={0.5}
+            streakCount={2}
+            streakWidth={1}
+            streakLength={1}
+            glow={1}
+            density={0.6}
+            twinkle={1}
+            zoom={3}
+            backgroundGlow={0.5}
+            opacity={1}
+            mouseInteraction
+            mouseStrength={0.5}
+            mouseRadius={1}
+          />
+        </div>
         <Navbar />
-        <div className="absolute -top-20 -left-20 w-96 h-96 rounded-full opacity-30" style={{ background: "#2D2754" }} />
-        <div className="absolute -bottom-24 -right-16 w-80 h-80 rounded-full opacity-20" style={{ background: "#32E1FC" }} />
-        <div className="relative max-w-7xl mx-auto px-6 py-24 text-center text-white">
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-5" style={{ background: "rgba(50,225,252,0.15)", color: "#32E1FC" }}>Get In Touch</span>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">Let's Start a <br /><span style={{ color: "#32E1FC" }}>Conversation</span></h1>
-          <p className="mt-5 text-lg max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.75)" }}>Whether you're a startup seeking funding or a partner looking to collaborate — we'd love to hear from you.</p>
+        <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
+          <span className="inline-block text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-5" style={{ background: "rgba(166,200,255,0.15)", color: "#A6C8FF" }}>Get In Touch</span>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight" style={{ color: "#ffffff" }}>Let's Start a <br /><span style={{ color: "#A6C8FF" }}>Conversation</span></h1>
+          <p className="mt-5 text-lg max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.65)" }}>Whether you're a startup seeking funding or a partner looking to collaborate — we'd love to hear from you.</p>
         </div>
       </div>
 
