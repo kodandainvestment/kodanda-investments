@@ -81,8 +81,8 @@ export default function Navbar() {
       {/* Navbar pill */}
       <nav className="mt-8 rounded-full max-w-[70%] mx-auto bg-white shadow-md relative z-50">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl ml-4" style={{ color: "#2E2C77" }}>
-            <span className="text-2xl">≡</span> Kodanda<span style={{ color: "#32E1FC" }}>°</span>
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl ml-4 text-blue-600 ">
+             Kodanda
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
@@ -125,10 +125,10 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-2">
             <Link href="/contact">
               <button
-                className="px-4 py-2 text-sm font-semibold text-white rounded-full transition"
-                style={{ background: "#2E2C77" }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "#2D2754")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "#2E2C77")}
+                className="px-4 py-2 text-sm font-semibold text-white bg-blue-600  rounded-full transition"
+                // style={{ background: "#2E2C77" }}
+                // onMouseEnter={(e) => (e.currentTarget.style.background = "#2D2754")}
+                // onMouseLeave={(e) => (e.currentTarget.style.background = "#2E2C77")}
               >
                 Get in touch
               </button>
