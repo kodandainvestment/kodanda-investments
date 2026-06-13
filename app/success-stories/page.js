@@ -10,7 +10,7 @@ import ExitHighlights from "./ExitHighlights";
 import ImpactNumbers from "./ImpactNumbers";
 
 // export const metadata = {
-//   title: "Success Stories – Kodanda Investments",
+//   title: "Suoccess Stories – Kodanda Investments",
 // };
 
 export default function SuccessStoriesPage() {
