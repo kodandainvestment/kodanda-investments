@@ -25,6 +25,7 @@ const navLinks = [
   { label: "Portfolio", href: "/portfolio-companies" },
   { label: "Funding", href: "/startup-funding" },
   { label: "Contact", href: "/contact" },
+  { label: "Trial", href: "/trial" },
 ];
 
 function MobileServicesMenu({ pathname, onClose }) {

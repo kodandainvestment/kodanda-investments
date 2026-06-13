@@ -1,180 +1,231 @@
 "use client";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Crosshair from "../Animations/Crosshair";
+import BlueBlobBg from "../CommonComp/BlueBlobBg";
+import BarGraph3D from "../CommonComp/BarGraph3D";
 
-const slides = [
-  {
-    id: 1,
-    tag: "Our Portfolio",
-    title: "Featured Portfolio",
-    bg: "#ffffff",
-    content: (
-      <div style={{ display: "flex", gap: 24, maxWidth: 700, flexWrap: "wrap" }}>
-        {[
-          ["Company A", "Leading AI-powered solutions provider", "rgba(46,44,119,0.06)"],
-          ["Company B", "Revolutionary manufacturing tech", "rgba(46,44,119,0.1)"],
-          ["Company C", "Healthcare innovation platform", "rgba(50,225,252,0.08)"],
-        ].map(([name, desc, color]) => (
-          <div key={name} style={{ flex: "1 1 180px", background: color, borderRadius: 16, padding: "24px 20px", minWidth: 160, border: "1px solid rgba(46,44,119,0.15)" }}>
-            <div style={{ width: "100%", height: 80, background: "rgba(50,225,252,0.12)", borderRadius: 10, marginBottom: 16 }} />
-            <p style={{ color: "#2D2754", fontWeight: 700, fontSize: 16, margin: 0 }}>{name}</p>
-            <p style={{ color: "rgba(46,44,119,0.6)", fontSize: 13, margin: "6px 0 0" }}>{desc}</p>
-          </div>
+/* ── Shared line reveal ── */
+function Line({ children, delay = 0, style = {}, triggered }) {
+  return (
+    <div style={{ overflow: "hidden" }}>
+      <motion.div
+        animate={triggered ? { y: 0, opacity: 1 } : { y: "100%", opacity: 0 }}
+        initial={{ y: "100%", opacity: 0 }}
+        transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
+        style={style}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+/* ── Slide 1 — Portfolio (coins right side) ── */
+function PortfolioSlide() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const cards = [
+    { name: "Company A", desc: "Leading AI-powered solutions provider" },
+    { name: "Company B", desc: "Revolutionary manufacturing tech" },
+    { name: "Company C", desc: "Healthcare innovation platform" },
+  ];
+  const FS = "clamp(44px,7vw,96px)";
+
+  return (
+    <section ref={ref} style={{ minHeight: "100vh", background: "#ffffff", display: "flex", alignItems: "center", padding: "80px 6vw", gap: "4vw" }}>
+      {/* LEFT — headline + cards */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <motion.p
+          animate={inView ? { opacity: 0.7, y: 0 } : { opacity: 0, y: 12 }} initial={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.5 }}
+          style={{ color: "#2E2C77", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}
+        >
+          <span style={{ width: 28, height: 2, background: "#2E2C77", borderRadius: 2, display: "inline-block" }} />
+          01 — Our Portfolio
+        </motion.p>
+
+        <div style={{ marginBottom: 40 }}>
+          <Line triggered={inView} delay={0.05} style={{ fontSize: FS, fontWeight: 900, lineHeight: 0.92, color: "#2D2754", letterSpacing: "-0.03em", textTransform: "uppercase" }}>FEATURED</Line>
+          <Line triggered={inView} delay={0.14} style={{ fontSize: FS, fontWeight: 900, lineHeight: 0.92, WebkitTextStroke: "2px #2D2754", color: "transparent", letterSpacing: "-0.03em", textTransform: "uppercase" }}>PORT-</Line>
+          <Line triggered={inView} delay={0.23} style={{ fontSize: FS, fontWeight: 900, lineHeight: 0.92, letterSpacing: "-0.03em", textTransform: "uppercase" }}>
+            <span style={{ background: "#2E2C77", color: "#fff", padding: "0 12px" }}>FOLIO.</span>
+          </Line>
+        </div>
+
+        <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+          {cards.map((c, i) => (
+            <motion.div
+              key={c.name}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }} initial={{ opacity: 0, y: 40 }}
+              transition={{ delay: 0.4 + i * 0.12, duration: 0.6 }}
+              whileHover={{ y: -8, boxShadow: "0 20px 50px rgba(46,44,119,0.15)" }}
+              style={{ flex: "1 1 150px", minWidth: 140, background: "#fff", borderRadius: 16, padding: "22px 18px", border: "1px solid rgba(46,44,119,0.12)", cursor: "pointer" }}
+            >
+              <div style={{ width: "100%", height: 56, background: "linear-gradient(135deg, rgba(50,225,252,0.12), rgba(46,44,119,0.08))", borderRadius: 10, marginBottom: 12 }} />
+              <p style={{ color: "#2D2754", fontWeight: 700, fontSize: 14, margin: 0 }}>{c.name}</p>
+              <p style={{ color: "rgba(46,44,119,0.55)", fontSize: 12, margin: "5px 0 0" }}>{c.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* RIGHT — graph animation */}
+      <div style={{ flex: "0 0 auto", display: "flex", alignItems: "flex-end", justifyContent: "center", minWidth: 280 }}>
+        <BarGraph3D trigger={inView} />
+      </div>
+    </section>
+  );
+}
+
+/* ── Slide 2 — Why Choose Us (dark, full editorial headline) ── */
+function WhyUsSlide() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const stats = [["₹500Cr+", "Capital Deployed"], ["50+", "Startups Funded"], ["5x", "Average Returns"], ["12+", "Years of Trust"]];
+  const features = [
+    ["✦", "Proven Track Record", "50+ investments, 5x average return across fintech, healthtech, agritech, and deep-tech."],
+    ["⬡", "Strategic Network", "200+ industry leaders, seasoned advisors, and global investors who open doors for you."],
+    ["◈", "Flexible Capital", "Equity, convertible notes, or hybrid — tailored to your exact stage from pre-revenue to Series B."],
+  ];
+  const FS = "clamp(52px,9vw,124px)";
+
+  return (
+    <section ref={ref} style={{ minHeight: "100vh", background: "#2D2754", display: "flex", flexDirection: "column", justifyContent: "center", padding: "80px 6vw", position: "relative", overflow: "hidden" }}>
+      <BlueBlobBg />
+      <Crosshair containerRef={ref} color="#32E1FC" />
+
+      <motion.p
+        animate={inView ? { opacity: 0.8, y: 0 } : { opacity: 0, y: 12 }} initial={{ opacity: 0, y: 12 }}
+        transition={{ duration: 0.5 }}
+        style={{ color: "#32E1FC", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}
+      >
+        <span style={{ width: 28, height: 2, background: "#32E1FC", borderRadius: 2, display: "inline-block" }} />
+        02 — Our Edge
+      </motion.p>
+
+      <div style={{ marginBottom: 48 }}>
+        <Line triggered={inView} delay={0.05} style={{ fontSize: "clamp(32px,4.5vw,68px)", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.03em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+          <span style={{ color: "#ffffff" }}>WHY{" "}</span>
+          <span style={{ WebkitTextStroke: "2px #ffffff", color: "transparent" }}>CHOOSE{" "}</span>
+          <span style={{ background: "#32E1FC", color: "#2D2754", padding: "0 14px" }}>US?</span>
+        </Line>
+      </div>
+
+      <motion.div
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }} initial={{ opacity: 0, y: 30 }}
+        transition={{ delay: 0.38, duration: 0.65 }}
+        style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "rgba(255,255,255,0.06)", borderRadius: 16, overflow: "hidden", marginBottom: 32, maxWidth: 900 }}
+      >
+        {stats.map(([val, label], i) => (
+          <motion.div key={label} animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} initial={{ opacity: 0, y: 20 }} transition={{ delay: 0.42 + i * 0.07, duration: 0.5 }}
+            style={{ padding: "26px 20px", background: "rgba(255,255,255,0.03)", textAlign: "center" }}>
+            <p style={{ color: "#32E1FC", fontSize: "clamp(20px,2.5vw,34px)", fontWeight: 800, margin: 0 }}>{val}</p>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 11, margin: "6px 0 0", letterSpacing: "0.06em", textTransform: "uppercase" }}>{label}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18, maxWidth: 900, marginBottom: 32 }}>
+        {features.map(([icon, title, desc], i) => (
+          <motion.div key={title}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }} initial={{ opacity: 0, y: 40 }}
+            transition={{ delay: 0.55 + i * 0.1, duration: 0.6 }}
+            whileHover={{ y: -5, borderColor: "rgba(50,225,252,0.45)" }}
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "24px 20px", cursor: "default", transition: "border-color 0.3s" }}>
+            <span style={{ fontSize: 20, color: "#32E1FC", display: "block", marginBottom: 10 }}>{icon}</span>
+            <p style={{ color: "#fff", fontWeight: 700, fontSize: 15, margin: "0 0 7px" }}>{title}</p>
+            <p style={{ color: "rgba(255,255,255,0.42)", fontSize: 13, lineHeight: 1.7, margin: 0 }}>{desc}</p>
+          </motion.div>
         ))}
       </div>
-    ),
-  },
-  {
-    id: 2,
-    tag: "Our Edge",
-    title: "Why Choose Us",
-    bg: "#2D2754",
-    content: (
-      <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
 
-        {/* Subtitle */}
-        <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 18, maxWidth: 600, margin: "0 auto 56px", textAlign: "center", lineHeight: 1.7 }}>
-          We don't just fund startups — we build lasting partnerships rooted in trust, strategy, and shared success.
-        </p>
-
-        {/* Top stat bar */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden", marginBottom: 48 }}>
-          {[
-            ["₹500Cr+", "Capital Deployed"],
-            ["50+", "Startups Funded"],
-            ["5x", "Average Returns"],
-            ["12+", "Years of Trust"],
-          ].map(([val, label]) => (
-            <div key={label} style={{ padding: "32px 24px", background: "rgba(255,255,255,0.04)", textAlign: "center" }}>
-              <p style={{ color: "#32E1FC", fontSize: "clamp(28px,3vw,40px)", fontWeight: 800, margin: 0, lineHeight: 1 }}>{val}</p>
-              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, margin: "8px 0 0", letterSpacing: "0.05em", textTransform: "uppercase" }}>{label}</p>
-            </div>
-          ))}
+      <motion.div
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }} initial={{ opacity: 0, y: 24 }}
+        transition={{ delay: 0.85, duration: 0.6 }}
+        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(50,225,252,0.06)", border: "1px solid rgba(50,225,252,0.2)", borderRadius: 14, padding: "22px 32px", flexWrap: "wrap", gap: 16, maxWidth: 900 }}
+      >
+        <div>
+          <p style={{ color: "#fff", fontWeight: 700, fontSize: 17, margin: 0 }}>Ready to scale your startup?</p>
+          <p style={{ color: "rgba(255,255,255,0.42)", fontSize: 13, margin: "3px 0 0" }}>Join 50+ founders who chose Kodanda as their growth partner.</p>
         </div>
+        <motion.a href="/startup-funding"
+          whileHover={{ scale: 1.05, boxShadow: "0 8px 28px rgba(50,225,252,0.35)" }} whileTap={{ scale: 0.97 }}
+          style={{ padding: "13px 30px", borderRadius: 999, background: "#32E1FC", color: "#2D2754", fontWeight: 700, fontSize: 14, textDecoration: "none", whiteSpace: "nowrap" }}>
+          Apply for Funding →
+        </motion.a>
+      </motion.div>
+    </section>
+  );
+}
 
-        {/* Feature cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24, marginBottom: 40 }}>
-          {[
-            ["✦", "Proven Track Record", "With 50+ successful investments and a 5x average return, our portfolio speaks for itself. We've backed winners across fintech, healthtech, agritech, and deep-tech."],
-            ["⬡", "Strategic Network", "Gain instant access to our curated network of 200+ industry leaders, seasoned advisors, and global investors who actively open doors for our portfolio companies."],
-            ["◈", "Flexible Capital", "Whether you're pre-revenue or scaling to Series B, we tailor our capital solutions — equity, convertible notes, or hybrid instruments — to match your exact growth stage."],
-            // ["✺", "Hands-on Mentorship", "Our investment team includes ex-founders and domain experts who roll up their sleeves alongside you — from product-market fit to IPO readiness."],
-            // ["◉", "Due Diligence You Trust", "Our rigorous but founder-friendly evaluation ensures every deal is built on transparency, fair valuation, and mutual respect — no surprises post-term sheet."],
-            // ["⬢", "Long-term Partnership", "We don't exit at Series A. Our rolling support model means we stay invested in your journey — operationally, financially, and strategically."],
-          ].map(([icon, title, desc]) => (
-            <div
-              key={title}
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: 20,
-                padding: "32px 28px",
-                transition: "border-color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(50,225,252,0.4)")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
-            >
-              <span style={{ fontSize: 24, color: "#32E1FC", display: "block", marginBottom: 16 }}>{icon}</span>
-              <p style={{ color: "#fff", fontWeight: 700, fontSize: 17, margin: "0 0 10px" }}>{title}</p>
-              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 14, lineHeight: 1.75, margin: 0 }}>{desc}</p>
-            </div>
-          ))}
-        </div>
+/* ── Slide 3 — Newsletter (coins left side) ── */
+function NewsletterSlide() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const FS = "clamp(44px,7vw,96px)";
 
-        {/* Bottom CTA strip */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(50,225,252,0.07)", border: "1px solid rgba(50,225,252,0.2)", borderRadius: 20, padding: "28px 40px", flexWrap: "wrap", gap: 20 }}>
-          <div>
-            <p style={{ color: "#fff", fontWeight: 700, fontSize: 20, margin: 0 }}>Ready to scale your startup?</p>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, margin: "4px 0 0" }}>Join 50+ founders who chose Kodanda as their growth partner.</p>
-          </div>
-          <a href="/startup-funding" style={{ padding: "14px 36px", borderRadius: 999, background: "#32E1FC", color: "#2D2754", fontWeight: 700, fontSize: 15, textDecoration: "none", whiteSpace: "nowrap" }}>
-            Apply for Funding →
-          </a>
-        </div>
+  return (
+    <section ref={ref} style={{ minHeight: "100vh", background: "#ffffff", display: "flex", alignItems: "center", padding: "80px 6vw", gap: "4vw" }}>
+      {/* LEFT — graph animation */}
+      <div style={{ flex: "0 0 auto", display: "flex", alignItems: "flex-end", justifyContent: "center", minWidth: 280 }}>
+        <BarGraph3D trigger={inView} />
       </div>
-    ),
-  },
-  {
-    id: 3,
-    tag: "Stay Connected",
-    title: "Newsletter Signup",
-    bg: "#ffffff",
-    content: (
-      <div style={{ maxWidth: 560 }}>
-        <p style={{ color: "rgba(46,44,119,0.6)", fontSize: 18, lineHeight: 1.7, margin: "0 0 40px" }}>
+
+      {/* RIGHT — headline + form, shifted left */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start", textAlign: "left", paddingLeft: "2vw", paddingRight: "10vw" }}>
+        <motion.p
+          animate={inView ? { opacity: 0.7, y: 0 } : { opacity: 0, y: 12 }} initial={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.5 }}
+          style={{ color: "#2E2C77", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}
+        >
+          <span style={{ width: 28, height: 2, background: "#2E2C77", borderRadius: 2, display: "inline-block" }} />
+          03 — Stay Connected
+        </motion.p>
+
+        <div style={{ marginBottom: 36 }}>
+          <Line triggered={inView} delay={0.05} style={{ fontSize: "clamp(32px,4.5vw,68px)", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.03em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+            <span style={{ color: "#2D2754" }}>STAY IN</span>
+          </Line>
+          <Line triggered={inView} delay={0.14} style={{ fontSize: "clamp(32px,4.5vw,68px)", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.03em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+            <span style={{ WebkitTextStroke: "2px #2D2754", color: "transparent" }}>THE{" "}</span>
+            <span style={{ background: "#2E2C77", color: "#fff", padding: "0 12px" }}>LOOP.</span>
+          </Line>
+        </div>
+
+        <motion.p
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }} initial={{ opacity: 0, y: 16 }}
+          transition={{ delay: 0.38, duration: 0.6 }}
+          style={{ color: "rgba(46,44,119,0.6)", fontSize: 16, lineHeight: 1.7, maxWidth: 420, margin: "0 0 32px" }}
+        >
           Stay updated with the latest investment opportunities, portfolio news, and insights from India's startup ecosystem.
-        </p>
-        <form onSubmit={(e) => e.preventDefault()} style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            style={{
-              flex: "1 1 260px",
-              padding: "14px 24px",
-              borderRadius: 999,
-              border: "1px solid rgba(46,44,119,0.25)",
-              background: "#f8f8ff",
-              color: "#2D2754",
-              fontSize: 15,
-              outline: "none",
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              padding: "14px 32px",
-              borderRadius: 999,
-              background: "#2E2C77",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: 15,
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
+        </motion.p>
+
+        <motion.form
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }} initial={{ opacity: 0, y: 16 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          onSubmit={(e) => e.preventDefault()}
+          style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "flex-start" }}
+        >
+          <input type="email" placeholder="Enter your email" suppressHydrationWarning
+            style={{ flex: "1 1 220px", padding: "13px 20px", borderRadius: 999, border: "1.5px solid rgba(46,44,119,0.2)", background: "#f8f8ff", color: "#2D2754", fontSize: 14, outline: "none" }} />
+          <motion.button type="submit" suppressHydrationWarning
+            whileHover={{ scale: 1.05, boxShadow: "0 8px 24px rgba(46,44,119,0.25)" }} whileTap={{ scale: 0.97 }}
+            style={{ padding: "13px 26px", borderRadius: 999, background: "#2E2C77", color: "#fff", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer" }}>
             Subscribe
-          </button>
-        </form>
+          </motion.button>
+        </motion.form>
       </div>
-    ),
-  },
-];
+    </section>
+  );
+}
 
 export default function Featured() {
   return (
     <>
-      {slides.map((slide) => (
-        <section
-          key={slide.id}
-          style={{
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "80px 10vw",
-            alignItems: slide.id === 2 ? "center" : slide.id === 3 ? "flex-end" : "flex-start",
-            textAlign: slide.id === 2 ? "center" : slide.id === 3 ? "right" : "left",
-            position: "relative",
-            // Fixed bg image for slides 1 and 3
-            ...(slide.id === 1 || slide.id === 3
-              ? {
-                  backgroundImage: "url('/hero-img.jpeg')",
-                  backgroundAttachment: "fixed",
-                  backgroundSize: "30% 50%",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: slide.id === 1 ? "90% center" : "10% center",
-                  backgroundColor: slide.bg,
-                }
-              : { background: slide.bg }),
-          }}
-        >
-          <span style={{ fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: slide.bg === "#ffffff" ? "#2E2C77" : "#32E1FC", opacity: 0.7, marginBottom: 16 }}>
-            0{slide.id} — {slide.tag}
-          </span>
-          <h2 style={{ color: slide.bg === "#ffffff" ? "#2D2754" : "#fff", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 800, margin: "0 0 32px", lineHeight: 1.1 }}>
-            {slide.title}
-          </h2>
-          {slide.content}
-        </section>
-      ))}
+      <PortfolioSlide />
+      <WhyUsSlide />
+      <NewsletterSlide />
     </>
   );
 }

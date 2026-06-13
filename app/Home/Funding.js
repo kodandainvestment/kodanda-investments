@@ -1,6 +1,8 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Crosshair from "../Animations/Crosshair";
+import BlueBlobBg from "../CommonComp/BlueBlobBg";
 
 const BRAND = "#32E1FC";
 const BRAND_DARK = "#2D2754";
@@ -38,13 +40,27 @@ export default function Funding() {
   const ringRotateDeg = useTransform(scrollYProgress, [0, 1], [0, -270]);
   const activeStep = useTransform(scrollYProgress, (v) => Math.min(3, Math.floor(v * 4)));
 
+  const stickyRef = useRef(null);
+
   return (
     <div ref={containerRef} style={{ height: "500vh", background: "#2D2754" }}>
-      <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", background: "#2D2754" }}>
-        <div style={{ position: "absolute", top: 40, left: "50%", transform: "translateX(-50%)", textAlign: "center" }}>
-          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", margin: 0 }}>
-            Funding Process
-          </p>
+      <div ref={stickyRef} style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", background: "#2D2754" }}>
+        <BlueBlobBg />
+        <BlueBlobBg />
+        <Crosshair containerRef={stickyRef} color="#32E1FC" />
+        {/* Editorial headline — top-left, 70% width */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, padding: "36px 5vw 0", pointerEvents: "none" }}>
+          <div style={{ overflow: "hidden" }}>
+            <motion.div
+              initial={{ y: "110%" }} whileInView={{ y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.22,1,0.36,1] }}
+              style={{ fontSize: "clamp(36px,5.5vw,80px)", fontWeight: 900, lineHeight: 0.92, letterSpacing: "-0.03em", textTransform: "uppercase", display: "flex", gap: "0.25em", flexWrap: "wrap" }}
+            >
+              <span style={{ color: "#ffffff" }}>FROM</span>
+              <span style={{ WebkitTextStroke: "2px #32E1FC", color: "transparent" }}>IDEA</span>
+              <span style={{ background: "#32E1FC", color: "#2D2754", padding: "0 10px" }}>TO FUNDING.</span>
+            </motion.div>
+          </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 80, width: "min(90vw, 1100px)" }}>
