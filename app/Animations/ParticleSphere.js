@@ -112,12 +112,17 @@ function makeGalaxy(count, size) {
   return pts;
 }
 
-// CTA: full-screen scatter
+// CTA: full-screen scatter — fills entire viewport
 function makeScatter(count) {
   const pts = [];
   // world units at camera z=320, fov=60: width≈369, height≈230
+  // Use 2x to guarantee edge-to-edge coverage
   for (let i = 0; i < count; i++) {
-    pts.push(new THREE.Vector3((Math.random()-.5)*380, (Math.random()-.5)*240, (Math.random()-.5)*100));
+    pts.push(new THREE.Vector3(
+      (Math.random() - 0.5) * 740,
+      (Math.random() - 0.5) * 460,
+      (Math.random() - 0.5) * 60,
+    ));
   }
   return pts;
 }
@@ -222,7 +227,7 @@ export default function ParticleBackground({ radius = 130, count = 2400, activeC
       // Positive = right side of screen, Negative = left side
       let targetX;
       if      (cta.active)   targetX = 0;               // spread center
-      else if (why.active)   targetX = LEFT  * why.t;   // helix LEFT
+      else if (why.active)   targetX = LEFT * 3.0 * why.t;   // helix — pushed far left
       else if (port.active)  targetX = RIGHT * port.t;  // rope RIGHT
       else if (fnd.active)   targetX = LEFT * 1.8 * fnd.t;   // ring/step — pushed far left
       else if (cmp.active)   targetX = RIGHT * cmp.t;   // ladder RIGHT
