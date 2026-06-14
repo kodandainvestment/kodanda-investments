@@ -243,7 +243,7 @@ export default function FundManagement() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mt-3 text-3xl md:text-5xl font-bold text-indigo-950"
           >
-            Fund <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Management</span>
+            Fund <span className="text-indigo-900">Management</span>
           </motion.h2>
 
           <motion.p
@@ -328,7 +328,7 @@ export default function FundManagement() {
 
                 {/* Fund Icon */}
                 <motion.div
-                  className="mt-6 w-12 h-12 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center"
+                  className="mt-6 w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center"
                   whileHover={{ scale: 1.15, rotate: 10 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
@@ -347,7 +347,7 @@ export default function FundManagement() {
 
                 {/* Corpus Amount with animation */}
                 <motion.p
-                  className="mt-4 text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+                  className="mt-4 text-4xl font-bold text-indigo-900"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: f.index * 0.2 }}
@@ -368,7 +368,7 @@ export default function FundManagement() {
 
                 {/* Animated accent line */}
                 <motion.div
-                  className="mt-6 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 rounded-full"
+                  className="mt-6 h-1 bg-indigo-900 ounded-full"
                   initial={{ width: 0 }}
                   whileInView={{ width: "40%" }}
                   whileHover={{ width: "100%" }}

@@ -1,218 +1,139 @@
+
 "use client";
 
 import { Target, Eye } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export default function MissionVision() {
   const ref = useRef(null);
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start center", "end center"],
+    offset: ["start start", "end end"],
   });
 
-  // Scroll animations
-  const containerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const containerY = useTransform(scrollYProgress, [0, 0.2], [40, 0]);
+ 
 
-  const card1Scale = useTransform(scrollYProgress, [0.1, 0.4], [0.8, 1]);
-  const card1Opacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
-  const card1Y = useTransform(scrollYProgress, [0.1, 0.3], [60, 0]);
+const card2Y = useTransform(
+  scrollYProgress,
+  [0.2, 0.5],
+  [500, 0]
+);
 
-  const card2Scale = useTransform(scrollYProgress, [0.2, 0.5], [0.8, 1]);
-  const card2Opacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
-  const card2Y = useTransform(scrollYProgress, [0.2, 0.4], [60, 0]);
-
-  // Mouse hover handler for 3D tilt
-  const handleMouseMove = (e, cardIndex) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const rotateX = ((y - centerY) / centerY) * 12;
-    const rotateY = ((x - centerX) / centerX) * 12;
-
-    setMousePosition({ rotateX, rotateY, cardIndex });
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredCard(null);
-  };
-
-  const handleMouseEnter = (cardIndex) => {
-    setHoveredCard(cardIndex);
-  };
-
-  const cards = [
-    {
-      Icon: Target,
-      label: "Our Mission",
-      text:
-        "To democratise venture capital by channelling smart money and strategic mentorship into high-potential startups — especially from India's emerging cities — enabling them to compete on a global stage.",
-      color: "from-indigo-600 to-purple-600",
-    },
-    {
-      Icon: Eye,
-      label: "Our Vision",
-      text:
-        "To be India's most founder-friendly investment firm, recognised for building transformative companies that uplift communities, create employment, and drive sustainable economic growth.",
-      color: "from-purple-600 to-indigo-600",
-    },
-  ];
+const card2Opacity = useTransform(
+  scrollYProgress,
+  [0.2, 0.35],
+  [0, 1]
+);
 
   return (
-    <section ref={ref} className="relative bg-indigo-950 py-20 px-6 overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute -left-40 -top-40 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute -right-40 bottom-0 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000" />
+    <section
+      ref={ref}
+      className="relative bg-indigo-950 overflow-hidden"
+    >
+      {/* Background Glow */}
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[120px]" />
 
-      {/* Content */}
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 px-6">
+
+        {/* LEFT SIDE */}
+        <div className="hidden lg:flex sticky top-0 h-screen items-center">
+          <div>
+      
+          </div>
+        </div>
+
+        {/* RIGHT SIDE */}
+<div className="relative h-[120vh]">
+
+  <div className="sticky top-24 flex justify-end">
+
+    <div className="relative w-full max-w-lg h-[420px]">
+
+      {/* CARD 1 */}
       <motion.div
-        ref={ref}
-        style={{
-          opacity: containerOpacity,
-          y: containerY,
-        }}
-        className="relative max-w-5xl mx-auto"
+        className="absolute inset-0 z-10"
       >
-        {/* Section Title with animation */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Our <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Impact Vision</span>
-          </motion.h2>
-        </motion.div>
+        <div className="relative h-full overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-7 md:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
 
-        {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-10">
-          {cards.map(({ Icon, label, text, color }, idx) => (
-            <motion.div
-              key={label}
-              style={
-                hoveredCard === idx
-                  ? {
-                      scale: card1Scale,
-                      opacity: card1Opacity,
-                      y: card1Y,
-                      rotateX: mousePosition.rotateX,
-                      rotateY: mousePosition.rotateY,
-                    }
-                  : idx === 0
-                  ? {
-                      scale: card1Scale,
-                      opacity: card1Opacity,
-                      y: card1Y,
-                    }
-                  : {
-                      scale: card2Scale,
-                      opacity: card2Opacity,
-                      y: card2Y,
-                    }
-              }
-              onMouseMove={(e) => handleMouseMove(e, idx)}
-              onMouseEnter={() => handleMouseEnter(idx)}
-              onMouseLeave={handleMouseLeave}
-              transition={hoveredCard === idx ? { type: "spring", stiffness: 300, damping: 30 } : undefined}
-              className="group relative cursor-pointer"
-            >
-              {/* Card */}
-              <motion.div
-                className="relative bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm overflow-hidden"
-                whileHover={{
-                  boxShadow: "0 0 40px rgba(79, 70, 229, 0.4)",
-                }}
-              >
-                {/* Animated gradient background on hover */}
-                <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 blur-2xl`}
-                  whileHover={{ opacity: 0.1 }}
-                  transition={{ duration: 0.3 }}
-                />
+          <div className="absolute top-0 right-0 w-52 h-52 bg-indigo-500/10 rounded-full blur-[80px]" />
 
-                {/* Animated border */}
-                <motion.div
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${color} opacity-0 p-[1px]`}
-                  whileHover={{ opacity: 0.2 }}
-                  transition={{ duration: 0.3 }}
-                />
+          <div className="relative z-10">
+            <div className="text-5xl font-bold text-white/10 mb-6">
+              01
+            </div>
 
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Icon with animation */}
-                  <motion.div
-                    className={`w-12 h-12 rounded-full bg-gradient-to-r ${color} flex items-center justify-center mb-5`}
-                    whileHover={{
-                      scale: 1.1,
-                      rotate: 10,
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    <Icon size={22} className="text-white" />
-                  </motion.div>
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <Target size={18} className="text-indigo-300" />
+              <span className="text-white text-sm">
+                Our Mission
+              </span>
+            </div>
 
-                  {/* Label with animation */}
-                  <motion.h3
-                    className="text-2xl font-bold text-white mb-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-                  >
-                    {label}
-                  </motion.h3>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-5">
+              Empowering Visionary Founders
+            </h3>
 
-                  {/* Text with animation */}
-                  <motion.p
-                    className="text-white/60 leading-relaxed group-hover:text-white/80 transition-colors duration-300"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-                  >
-                    {text}
-                  </motion.p>
+            <p className="text-white/70 text-base leading-relaxed">
+              To democratise venture capital by channelling smart money and
+              strategic mentorship into high-potential startups — especially
+              from India's emerging cities — enabling them to compete on a
+              global stage.
+            </p>
 
-                  {/* Accent line animation */}
-                  <motion.div
-                    className={`h-1 bg-gradient-to-r ${color} mt-6 rounded-full`}
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "100%" }}
-                    whileInView={{ width: "60%" }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </div>
-
-                {/* Floating particles effect */}
-                <motion.div
-                  className={`absolute top-4 right-4 w-20 h-20 rounded-full bg-gradient-to-r ${color} opacity-0 blur-xl`}
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0, 0.15, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    delay: idx * 0.5,
-                  }}
-                />
-              </motion.div>
-            </motion.div>
-          ))}
+            <div className="w-20 h-1 rounded-full bg-gradient-to-r from-indigo-400 to-blue-500 mt-8" />
+          </div>
         </div>
       </motion.div>
+
+      {/* CARD 2 */}
+      <motion.div
+        style={{
+          y: card2Y,
+          opacity: card2Opacity,
+        }}
+        className="absolute inset-0 z-20"
+      >
+        <div className="relative h-full overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 p-7 md:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+
+          <div className="absolute bottom-0 left-0 w-52 h-52 bg-blue-500/10 rounded-full blur-[80px]" />
+
+          <div className="relative z-10">
+            <div className="text-5xl font-bold text-white/10 mb-6">
+              02
+            </div>
+
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <Eye size={18} className="text-blue-300" />
+              <span className="text-white text-sm">
+                Our Vision
+              </span>
+            </div>
+
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-5">
+              Building India's Next Generation
+            </h3>
+
+            <p className="text-white/70 text-base leading-relaxed">
+              To be India's most founder-friendly investment firm,
+              recognised for building transformative companies that uplift
+              communities, create employment, and drive sustainable economic
+              growth.
+            </p>
+
+            <div className="w-20 h-1 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 mt-8" />
+          </div>
+        </div>
+      </motion.div>
+
+    </div>
+
+  </div>
+
+</div>
+      </div>
     </section>
   );
 }
